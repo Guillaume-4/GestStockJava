@@ -1,43 +1,54 @@
 package models;
 
-public class Product {
-    private String name;
-    private int quantity;
-    private double unitPrice;
-    private Furnisher furnisher;
+import java.util.ArrayList;
+import java.util.List;
 
-    // Constructor
-    public Product(String name, int quantity, double unitPrice, Furnisher furnisher) {
+public class Product {
+    private int product_id;
+    private String product_name;
+    private int product_quantity;
+    private double product_unit_price;
+    private Furnisher furnisher;
+    private List<Sale> sales;
+
+    // Constructors
+    public Product() {
+        this.sales = new ArrayList<>();
+    }
+
+    public Product(String product_name, int product_quantity, double product_unit_price, Furnisher furnisher,
+            List<Sale> sales) {
         super();
-        this.name = name;
-        this.quantity = quantity;
-        this.unitPrice = unitPrice;
+        this.product_name = product_name;
+        this.product_quantity = product_quantity;
+        this.product_unit_price = product_unit_price;
         this.furnisher = furnisher;
+        this.sales = sales != null ? sales : new ArrayList<>();
     }
 
     // Setters & Getters
     public String getName() {
-        return name;
+        return product_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String product_name) {
+        this.product_name = product_name;
     }
 
     public int getQuantity() {
-        return quantity;
+        return product_quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQuantity(int product_quantity) {
+        this.product_quantity = product_quantity;
     }
 
     public double getUnitPrice() {
-        return unitPrice;
+        return product_unit_price;
     }
 
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setUnitPrice(double product_unit_price) {
+        this.product_unit_price = product_unit_price;
     }
 
     public Furnisher getFurnisher() {
@@ -48,12 +59,32 @@ public class Product {
         this.furnisher = furnisher;
     }
 
+    public List<Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(List<Sale> sales) {
+        this.sales = sales != null ? sales : new ArrayList<>();
+    }
+
     // Functions
     public void afficher() {
-        // TODO : System.out.println
+        System.out.println(this.toString());
     }
 
     public boolean isSoldOut() {
-        return quantity == 0;
+        return product_quantity == 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Product {" +
+                "product_id=" + product_id +
+                ", product_name='" + product_name + "'" +
+                ", product_quantity=" + product_quantity +
+                ", product_unit_price=" + product_unit_price +
+                ", furnisher=" + furnisher +
+                ", sales=" + sales +
+                "}";
     }
 }
