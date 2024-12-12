@@ -10,12 +10,17 @@ public class Category {
         this.category_name = category_name;
     }
 
-    // Setters & Getters
-    public String getName() {
+    // Getters
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public String getCategory_name() {
         return category_name;
     }
 
-    public void setName(String category_name) {
+    // Setters
+    public void setCategory_name(String category_name) {
         this.category_name = category_name;
     }
 
