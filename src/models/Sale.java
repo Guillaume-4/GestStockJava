@@ -4,41 +4,46 @@ import java.util.Date;
 
 public class Sale {
     private int sale_id;
-    private Product product;
     private int sale_quantity;
     private Date sale_date;
+    private Product product;
 
     // Constructor
-    public Sale(Product product, int sale_quantity, Date sale_date) {
+    public Sale(int sale_quantity, Date sale_date, Product product) {
         super();
-        this.product = product;
         this.sale_quantity = sale_quantity;
         this.sale_date = sale_date;
+        this.product = product;
     }
 
-    // Setters & Getters
+    // Getters
+    public int getSale_id() {
+        return sale_id;
+    }
+
+    public int getSale_quantity() {
+        return sale_quantity;
+    }
+
+    public Date getSale_date() {
+        return sale_date;
+    }
+
     public Product getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public int getQuantity() {
-        return sale_quantity;
-    }
-
-    public void setQuantity(int sale_quantity) {
+    // Setters
+    public void setSale_quantity(int sale_quantity) {
         this.sale_quantity = sale_quantity;
     }
 
-    public Date getDate() {
-        return sale_date;
+    public void setSale_date(Date sale_date) {
+        this.sale_date = sale_date;
     }
 
-    public void setDate(Date sale_date) {
-        this.sale_date = sale_date;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     // Functions
