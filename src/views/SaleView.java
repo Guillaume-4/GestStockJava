@@ -2,6 +2,9 @@ package views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.border.EmptyBorder;
 
 public class SaleView {
@@ -33,6 +36,11 @@ public class SaleView {
         
 
         btnAjouter = new JButton("Ajouter");
+        btnAjouter.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event){
+                addSale();
+            }
+        });
 
         imageLabel = new JLabel(new ImageIcon("path_to_image.jpg"));
 
