@@ -1,4 +1,5 @@
 bin/
 lib/
 .idea/
+out/
 GestStockJava.iml
