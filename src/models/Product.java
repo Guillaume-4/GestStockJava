@@ -18,7 +18,6 @@ public class Product {
     }
 
     public Product(
-            int product_id,
             String product_name,
             int product_quantity,
             double product_unit_price,

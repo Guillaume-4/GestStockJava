@@ -4,8 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.border.EmptyBorder;
+
+import models.Product;
 
 public class SaleView {
     private JFrame frame;
@@ -36,11 +39,11 @@ public class SaleView {
         
 
         btnAjouter = new JButton("Ajouter");
-        btnAjouter.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event){
-                addSale();
-            }
-        });
+        //btnAjouter.addActionListener(new ActionListener() {
+            //public void actionPerformed(ActionEvent event){
+            //    addSale();
+            //}
+        //});
 
         imageLabel = new JLabel(new ImageIcon("path_to_image.jpg"));
 
@@ -67,5 +70,18 @@ public class SaleView {
 
     public static void main(String[] args) {
         new SaleView();
+    }
+
+    public Integer getQuantity() {
+        return Integer.parseInt(txtQuantity.getText(),10);
+    }
+
+    @SuppressWarnings("deprecation")
+    public Date getDate() {
+        return new Date(txtDate.getText());
+    }
+
+    public void setAddSaleListener(ActionListener listener) {
+        btnAjouter.addActionListener(listener);
     }
 }
