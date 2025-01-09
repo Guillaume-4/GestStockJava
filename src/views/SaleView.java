@@ -2,13 +2,10 @@ package views;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
 import javax.swing.border.EmptyBorder;
-
-import models.Product;
 
 public class SaleView {
     private JFrame frame;
