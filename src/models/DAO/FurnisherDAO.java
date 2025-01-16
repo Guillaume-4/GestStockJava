@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import models.Furnisher;
 
 public class FurnisherDAO {
-    public void addSale(Furnisher furnisher) {
+    public void addFurnisher(Furnisher furnisher) {
         String query = "INSERT INTO Furnisher (furnisher_name, furnisher_adress, furnisher_complement, furnisher_zipcode, furnisher_city, furnisher_country, furnisher_phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DBConnection.getConnection();
