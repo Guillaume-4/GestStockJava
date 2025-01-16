@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+
 public class SaleView {
     private JFrame frame;
     private JTextField quantityTxtField;
