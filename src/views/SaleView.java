@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import models.Product;
+
 public class SaleView {
     private JFrame frame;
     private JTextField quantityTxtField;
@@ -57,5 +59,18 @@ public class SaleView {
     // Setters
     public void setAddSaleListener(ActionListener listener) {
         addSaleBtn.addActionListener(listener);
+    }
+
+    public Integer getQuantity() {
+        return Integer.parseInt(txtQuantity.getText(),10);
+    }
+
+    @SuppressWarnings("deprecation")
+    public Date getDate() {
+        return new Date(txtDate.getText());
+    }
+
+    public void setAddSaleListener(ActionListener listener) {
+        btnAjouter.addActionListener(listener);
     }
 }
