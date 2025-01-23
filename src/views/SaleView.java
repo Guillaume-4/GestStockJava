@@ -3,8 +3,7 @@ package views;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.Date;
-
+import java.sql.Date;
 
 public class SaleView {
     private JFrame frame;
@@ -46,9 +45,8 @@ public class SaleView {
         return Integer.parseInt(quantityTxtField.getText(), 10);
     }
 
-    @SuppressWarnings("deprecation")
     public Date getDate() {
-        return new Date(dateTxtField.getText());
+        return Date.valueOf(dateTxtField.getText());
     }
 
     public int getProductID() {
