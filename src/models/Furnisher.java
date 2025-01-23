@@ -28,7 +28,6 @@ public class Furnisher {
             String furnisher_country,
             String furnisher_phone,
             List<Product> products) {
-        super();
         this.furnisher_name = furnisher_name;
         this.furnisher_adress = furnisher_address;
         this.furnisher_complement = furnisher_complement;
@@ -39,36 +38,56 @@ public class Furnisher {
         this.products = products != null ? products : new ArrayList<>();
     }
 
+    public Furnisher(
+            int furnisher_id,
+            String furnisher_name,
+            String furnisher_address,
+            String furnisher_complement,
+            String furnisher_zipcode,
+            String furnisher_city,
+            String furnisher_country,
+            String furnisher_phone) {
+        this.furnisher_id = furnisher_id;
+        this.furnisher_name = furnisher_name;
+        this.furnisher_adress = furnisher_address;
+        this.furnisher_complement = furnisher_complement;
+        this.furnisher_zipcode = furnisher_zipcode;
+        this.furnisher_city = furnisher_city;
+        this.furnisher_country = furnisher_country;
+        this.furnisher_phone = furnisher_phone;
+        this.products = new ArrayList<>();
+    }
+
     // Getters
-    public int getFurnisher_id() {
+    public int getFurnisherId() {
         return furnisher_id;
     }
 
-    public String getFurnisher_name() {
+    public String getFurnisherName() {
         return furnisher_name;
     }
 
-    public String getFurnisher_adress() {
+    public String getFurnisherAdress() {
         return furnisher_adress;
     }
 
-    public String getFurnisher_complement() {
+    public String getFurnisherComplement() {
         return furnisher_complement;
     }
 
-    public String getFurnisher_zipcode() {
+    public String getFurnisherZipcode() {
         return furnisher_zipcode;
     }
 
-    public String getFurnisher_city() {
+    public String getFurnisherCity() {
         return furnisher_city;
     }
 
-    public String getFurnisher_country() {
+    public String getFurnisherCountry() {
         return furnisher_country;
     }
 
-    public String getFurnisher_phone() {
+    public String getFurnisherPhone() {
         return furnisher_phone;
     }
 
@@ -77,31 +96,31 @@ public class Furnisher {
     }
 
     // Setters
-    public void setFurnisher_name(String furnisher_name) {
+    public void setFurnisherName(String furnisher_name) {
         this.furnisher_name = furnisher_name;
     }
 
-    public void setFurnisher_adress(String furnisher_adress) {
+    public void setFurnisherAdress(String furnisher_adress) {
         this.furnisher_adress = furnisher_adress;
     }
 
-    public void setFurnisher_complement(String furnisher_complement) {
+    public void setFurnisherComplement(String furnisher_complement) {
         this.furnisher_complement = furnisher_complement;
     }
 
-    public void setFurnisher_zipcode(String furnisher_zipcode) {
+    public void setFurnisherZipcode(String furnisher_zipcode) {
         this.furnisher_zipcode = furnisher_zipcode;
     }
 
-    public void setFurnisher_city(String furnisher_city) {
+    public void setFurnisherCity(String furnisher_city) {
         this.furnisher_city = furnisher_city;
     }
 
-    public void setFurnisher_country(String furnisher_country) {
+    public void setFurnisherCountry(String furnisher_country) {
         this.furnisher_country = furnisher_country;
     }
 
-    public void setFurnisher_phone(String furnisher_phone) {
+    public void setFurnisherPhone(String furnisher_phone) {
         this.furnisher_phone = furnisher_phone;
     }
 
