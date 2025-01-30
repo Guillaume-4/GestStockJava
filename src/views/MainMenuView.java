@@ -64,19 +64,15 @@ public class MainMenuView {
         frame.add(manageProductsBtn);
         frame.add(manageSalesBtn);
 
-        if (user.getUserRole().equals("manager")) {
-            manageFurnishersBtn.setEnabled(true);
-            manageCategoriesBtn.setEnabled(true);
-            manageProductsBtn.setEnabled(true);
-            manageSalesBtn.setEnabled(true);
-        } else {
+        if (!user.getUserRole().equals("manager") && !user.getUserRole().equals("administrator")) {
             manageFurnishersBtn.setEnabled(false);
             manageCategoriesBtn.setEnabled(false);
             manageProductsBtn.setEnabled(false);
             manageSalesBtn.setEnabled(false);
         }
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocation(800, 500);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }
 }
