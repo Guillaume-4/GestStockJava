@@ -18,14 +18,12 @@ public class Product {
     }
 
     public Product(
-            int product_id,
             String product_name,
             int product_quantity,
             double product_unit_price,
             Category category,
             Furnisher furnisher,
             List<Sale> sales) {
-        super();
         this.product_name = product_name;
         this.product_quantity = product_quantity;
         this.product_unit_price = product_unit_price;
@@ -34,20 +32,48 @@ public class Product {
         this.sales = sales != null ? sales : new ArrayList<>();
     }
 
+    public Product(
+            int product_id,
+            String product_name,
+            int product_quantity,
+            double product_unit_price,
+            Category category,
+            Furnisher furnisher) {
+        this.product_id = product_id;
+        this.product_name = product_name;
+        this.product_quantity = product_quantity;
+        this.product_unit_price = product_unit_price;
+        this.category = category;
+        this.furnisher = furnisher;
+        this.sales = new ArrayList<>();
+    }
+
+    public Product(
+            int product_id,
+            String product_name,
+            Category category,
+            Furnisher furnisher) {
+        this.product_id = product_id;
+        this.product_name = product_name;
+        this.category = category;
+        this.furnisher = furnisher;
+        this.sales = new ArrayList<>();
+    }
+
     // Getters
-    public int getProduct_id() {
+    public int getProductId() {
         return product_id;
     }
 
-    public String getProduct_name() {
+    public String getProductName() {
         return product_name;
     }
 
-    public int getProduct_quantity() {
+    public int getProductQuantity() {
         return product_quantity;
     }
 
-    public double getProduct_unit_price() {
+    public double getProductUnitPrice() {
         return product_unit_price;
     }
 
@@ -64,15 +90,15 @@ public class Product {
     }
 
     // Setters
-    public void setProduct_name(String product_name) {
+    public void setProductName(String product_name) {
         this.product_name = product_name;
     }
 
-    public void setProduct_quantity(int product_quantity) {
+    public void setProductQuantity(int product_quantity) {
         this.product_quantity = product_quantity;
     }
 
-    public void setProduct_unit_price(double product_unit_price) {
+    public void setProductUnitPrice(double product_unit_price) {
         this.product_unit_price = product_unit_price;
     }
 

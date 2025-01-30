@@ -2,90 +2,99 @@ package views;
 
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
 
 public class FurnisherView {
     private JFrame frame;
-    private JTextField txtName;
-    private JTextField txtAddress;
-    private JTextField txtComplement;
-    private JTextField txtZipcode;
-    private JTextField txtCity;
-    private JTextField txtCountry;
-    private JTextField txtPhone;
+    private JTextField nameTxtField;
+    private JTextField adressTxtField;
+    private JTextField complementTxtField;
+    private JTextField zipCodeTxtField;
+    private JTextField cityTxtField;
+    private JTextField countryTxtField;
+    private JTextField phoneTxtField;
+    private JButton addFurnisherBtn;
 
-    private JLabel labelName;
-    private JLabel labelAddress;
-    private JLabel labelComplement;
-    private JLabel labelZipcode;
-    private JLabel labelCity;
-    private JLabel labelCountry;
-    private JLabel labelPhone;
-    private JLabel imageLabel;
-    private JButton btnAjouter;
-
+    // Constructor
     public FurnisherView() {
-        frame = new JFrame("Ajout d'un Produit");
-
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(new GridLayout(10, 8, 10, 10));
-        contentPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
-
-        labelName = new JLabel("Nom :");
-        labelAddress = new JLabel("Addresse :");
-        labelCity = new JLabel("Ville :");
-        labelComplement = new JLabel("Complement :");
-        labelCountry = new JLabel("Pays :");
-        labelZipcode = new JLabel("Code Postal :");
-        labelPhone = new JLabel("Téléphone :");
-
-        txtName = new JTextField(15);
-        txtAddress = new JTextField(15);
-        txtCity = new JTextField(15);
-        txtComplement = new JTextField(15);
-        txtCountry = new JTextField(15);
-        txtZipcode = new JTextField(15);
-        txtPhone = new JTextField(15);
-        
-
-        btnAjouter = new JButton("Ajouter");
-
-        imageLabel = new JLabel(new ImageIcon("path_to_image.jpg"));
-
-        contentPanel.add(labelName);
-        contentPanel.add(txtName);
-        
-        contentPanel.add(labelAddress);
-        contentPanel.add(txtAddress);
-
-        contentPanel.add(labelCity);
-        contentPanel.add(txtCity);
-
-        contentPanel.add(labelComplement);
-        contentPanel.add(txtComplement);
-
-        contentPanel.add(labelCountry);
-        contentPanel.add(txtCountry);
-
-        contentPanel.add(labelZipcode);
-        contentPanel.add(txtZipcode);
-
-        contentPanel.add(labelPhone);
-        contentPanel.add(txtPhone);
-
-        contentPanel.add(new JLabel());
-        contentPanel.add(imageLabel);
-        contentPanel.add(new JLabel());
-        contentPanel.add(btnAjouter);
-
-        frame.add(contentPanel, BorderLayout.CENTER);
-
+        frame = new JFrame("Gestion de Stock");
+        frame.setLayout(new FlowLayout());
         frame.setSize(400, 300);
+
+        JLabel nameLabel = new JLabel("Nom :");
+        nameTxtField = new JTextField(15);
+
+        JLabel adressLabel = new JLabel("Addresse :");
+        adressTxtField = new JTextField(15);
+
+        JLabel cityLabel = new JLabel("Ville :");
+        cityTxtField = new JTextField(15);
+
+        JLabel complementLabel = new JLabel("Complement :");
+        complementTxtField = new JTextField(15);
+
+        JLabel countryLabel = new JLabel("Pays :");
+        countryTxtField = new JTextField(15);
+
+        JLabel zipCodeLabel = new JLabel("Code Postal :");
+        zipCodeTxtField = new JTextField(15);
+
+        JLabel phoneLabel = new JLabel("Téléphone :");
+        phoneTxtField = new JTextField(15);
+
+        addFurnisherBtn = new JButton("Ajouter Fournisseur");
+
+        frame.add(nameLabel);
+        frame.add(nameTxtField);
+        frame.add(adressLabel);
+        frame.add(adressTxtField);
+        frame.add(cityLabel);
+        frame.add(cityTxtField);
+        frame.add(complementLabel);
+        frame.add(complementTxtField);
+        frame.add(countryLabel);
+        frame.add(countryTxtField);
+        frame.add(zipCodeLabel);
+        frame.add(zipCodeTxtField);
+        frame.add(phoneLabel);
+        frame.add(phoneTxtField);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new FurnisherView();
+    // Getter
+    public String getFurnisherName() {
+        return nameTxtField.getText();
+    }
+
+    public String getFurnisherAdress() {
+        return adressTxtField.getText();
+    }
+
+    public String getFurnisherComplement() {
+        return complementTxtField.getText();
+    }
+
+    public String getFurnisherZipCode() {
+        return zipCodeTxtField.getText();
+    }
+
+    public String getFurnisherCity() {
+        return cityTxtField.getText();
+    }
+
+    public String getFurnisherCountry() {
+        return countryTxtField.getText();
+    }
+
+    public String getFurnisherPhone() {
+        return phoneTxtField.getText();
+    }
+
+    // Setter
+    public void setAddFurnisherListener(ActionListener listener) {
+        addFurnisherBtn.addActionListener(listener);
     }
 }
