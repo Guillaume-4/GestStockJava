@@ -6,10 +6,10 @@ import models.Category;
 import models.Furnisher;
 import models.DAO.CategoryDAO;
 import models.DAO.FurnisherDAO;
+import models.Product;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.util.List;
 
 public class ProductView {
@@ -21,15 +21,18 @@ public class ProductView {
     private JComboBox<String> categorySelector;
     private JComboBox<String> furnisherSelector;
 
-    private JTextField startDateTxtField;
-    private JTextField endDateTxtField;
-    private JTextArea reportArea;
+    private JButton productActionBtn;
 
-    private JButton addProductBtn;
-    private JButton generateReportBtn;
+    private Product product;
 
+    // Constructors
     public ProductView() {
-        frame = new JFrame("Gestion de Stock");
+        this(null);
+    }
+
+    public ProductView(Product product) {
+        this.product = product;
+        frame = new JFrame("Gestion des Produits");
         frame.setLayout(new FlowLayout());
         frame.setSize(400, 300);
 
@@ -50,25 +53,20 @@ public class ProductView {
         // Add product fields
         JLabel nameLabel = new JLabel("Nom du Produit :");
         nameTxtField = new JTextField(20);
+
         JLabel quantityLabel = new JLabel("Quantité :");
         quantityTxtField = new JTextField(20);
+
         JLabel unitPriceLabel = new JLabel("Prix :");
         unitPriceTxtField = new JTextField(20);
+
         JLabel categoryLabel = new JLabel("Catégorie :");
         categorySelector = new JComboBox<String>(categoryNames);
+
         JLabel furnisherLabel = new JLabel("Fournisseur :");
         furnisherSelector = new JComboBox<String>(furnisherNames);
-        addProductBtn = new JButton("Ajouter Produit");
 
-        // Report generation fields
-        JLabel startDateLabel = new JLabel("Date de Début (YYYY-MM-DD) :");
-        startDateTxtField = new JTextField(10);
-        JLabel endDateLabel = new JLabel("Date de Fin (YYYY-MM-DD) :");
-        endDateTxtField = new JTextField(10);
-        generateReportBtn = new JButton("Générer Rapport");
-
-        reportArea = new JTextArea(10, 30);
-        reportArea.setEditable(false);
+        productActionBtn = new JButton("Ajouter Produit");
 
         frame.add(nameLabel);
         frame.add(nameTxtField);
@@ -80,16 +78,24 @@ public class ProductView {
         frame.add(categorySelector);
         frame.add(furnisherLabel);
         frame.add(furnisherSelector);
-        frame.add(addProductBtn);
+        frame.add(productActionBtn);
 
-        frame.add(startDateLabel);
-        frame.add(startDateTxtField);
-        frame.add(endDateLabel);
-        frame.add(endDateTxtField);
-        frame.add(generateReportBtn);
-        frame.add(new JScrollPane(reportArea));
+        if (this.product != null) {
+            nameTxtField.setText(product.getProductName());
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            quantityTxtField.setText(String.valueOf(product.getProductQuantity()));
+
+            unitPriceTxtField.setText(String.valueOf(product.getProductUnitPrice()));
+
+            categorySelector.setSelectedItem(product.getCategory().getCategoryName());
+
+            furnisherSelector.setSelectedItem(product.getFurnisher().getFurnisherName());
+
+            productActionBtn.setText("Modifier Produit");
+        }
+
+        frame.setLocation(800, 500);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }
 
@@ -114,27 +120,12 @@ public class ProductView {
         return furnisherSelector.getSelectedItem().toString();
     }
 
-    public LocalDate getStartDate() {
-        return LocalDate.parse(startDateTxtField.getText());
-    }
-
-    public LocalDate getEndDate() {
-        return LocalDate.parse(endDateTxtField.getText());
+    public Product getProduct() {
+        return product;
     }
 
     // Setters
-    public void setAddProductListener(ActionListener listener) {
-        addProductBtn.addActionListener(listener);
-    }
-
-    public void setGenerateReportListener(ActionListener listener) {
-        generateReportBtn.addActionListener(listener);
-    }
-
-    // Methods
-    public void showReport(String produitNom, double prix, int ventesTotales) {
-        reportArea.setText("Rapport pour le produit : " + produitNom + "\n");
-        reportArea.append("Prix du produit : " + prix + "\n");
-        reportArea.append("Ventes totales dans la période : " + ventesTotales + "\n");
+    public void setProductListener(ActionListener listener) {
+        productActionBtn.addActionListener(listener);
     }
 }
