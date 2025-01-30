@@ -7,21 +7,21 @@ import models.DAO.FurnisherDAO;
 import views.FurnisherView;
 
 public class FurnisherController {
-    private FurnisherView vue;
+    private FurnisherView view;
     private FurnisherDAO furnisherDAO;
 
-    public FurnisherController(FurnisherView vue, FurnisherDAO furnisherDAO) {
-        this.vue = vue;
+    public FurnisherController(FurnisherView view, FurnisherDAO furnisherDAO) {
+        this.view = view;
         this.furnisherDAO = furnisherDAO;
 
-        this.vue.setAddFurnisherListener(e -> {
-            String name = vue.getFurnisherName();
-            String adress = vue.getFurnisherAdress();
-            String complement = vue.getFurnisherComplement();
-            String zipCode = vue.getFurnisherZipCode();
-            String city = vue.getFurnisherCity();
-            String country = vue.getFurnisherCountry();
-            String phone = vue.getFurnisherPhone();
+        this.view.setAddFurnisherListener(_ -> {
+            String name = view.getFurnisherName();
+            String adress = view.getFurnisherAdress();
+            String complement = view.getFurnisherComplement();
+            String zipCode = view.getFurnisherZipCode();
+            String city = view.getFurnisherCity();
+            String country = view.getFurnisherCountry();
+            String phone = view.getFurnisherPhone();
 
             Furnisher furnisher = new Furnisher(name, adress, complement, zipCode, city, country, phone, null);
 

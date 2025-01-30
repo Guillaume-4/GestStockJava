@@ -1,6 +1,6 @@
 package models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Sale {
     private int sale_id;
@@ -10,22 +10,28 @@ public class Sale {
 
     // Constructor
     public Sale(int sale_quantity, Date sale_date, Product product) {
-        super();
+        this.sale_quantity = sale_quantity;
+        this.sale_date = sale_date;
+        this.product = product;
+    }
+
+    public Sale(int sale_id, int sale_quantity, Date sale_date, Product product) {
+        this.sale_id = sale_id;
         this.sale_quantity = sale_quantity;
         this.sale_date = sale_date;
         this.product = product;
     }
 
     // Getters
-    public int getSale_id() {
+    public int getSaleId() {
         return sale_id;
     }
 
-    public int getSale_quantity() {
+    public int getSaleQuantity() {
         return sale_quantity;
     }
 
-    public Date getSale_date() {
+    public Date getSaleDate() {
         return sale_date;
     }
 
@@ -34,11 +40,11 @@ public class Sale {
     }
 
     // Setters
-    public void setSale_quantity(int sale_quantity) {
+    public void setSaleQuantity(int sale_quantity) {
         this.sale_quantity = sale_quantity;
     }
 
-    public void setSale_date(Date sale_date) {
+    public void setSaleDate(Date sale_date) {
         this.sale_date = sale_date;
     }
 
