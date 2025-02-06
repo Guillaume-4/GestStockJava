@@ -34,7 +34,7 @@ public class MainMenuView {
         manageFurnishersBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // new ManageFurnisherView(user);
+                new ManageFurnisherView(user);
             }
         });
 

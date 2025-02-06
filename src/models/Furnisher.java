@@ -58,6 +58,17 @@ public class Furnisher {
         this.products = new ArrayList<>();
     }
 
+    public Furnisher(String furnisher_name, String furnisher_address, String furnisher_complement, String furnisher_zipcode, String furnisher_city, String furnisher_country, String furnisher_phone) {
+        this.furnisher_name = furnisher_name;
+        this.furnisher_adress = furnisher_address;
+        this.furnisher_complement = furnisher_complement;
+        this.furnisher_zipcode = furnisher_zipcode;
+        this.furnisher_city = furnisher_city;
+        this.furnisher_country = furnisher_country;
+        this.furnisher_phone = furnisher_phone;
+        this.products = new ArrayList<>();
+    }
+
     // Getters
     public int getFurnisherId() {
         return furnisher_id;

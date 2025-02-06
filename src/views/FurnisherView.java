@@ -1,6 +1,9 @@
 package views;
 
 import javax.swing.*;
+
+import models.Furnisher;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -15,8 +18,15 @@ public class FurnisherView {
     private JTextField phoneTxtField;
     private JButton addFurnisherBtn;
 
-    // Constructor
+    private Furnisher furnisher;
+
     public FurnisherView() {
+        this(null);
+    }
+
+    // Constructor
+    public FurnisherView(Furnisher furnisher) {
+        this.furnisher = furnisher;
         frame = new JFrame("Gestion de Stock");
         frame.setLayout(new FlowLayout());
         frame.setSize(400, 300);
@@ -58,9 +68,27 @@ public class FurnisherView {
         frame.add(zipCodeTxtField);
         frame.add(phoneLabel);
         frame.add(phoneTxtField);
+        frame.add(addFurnisherBtn);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        if (this.furnisher != null) {
+            nameTxtField.setText(furnisher.getFurnisherName());
 
+            adressTxtField.setText(String.valueOf(furnisher.getFurnisherAdress()));
+
+            cityTxtField.setText(String.valueOf(furnisher.getFurnisherCity()));
+
+            complementTxtField.setText(String.valueOf(furnisher.getFurnisherComplement()));
+            countryTxtField.setText(String.valueOf(furnisher.getFurnisherCountry()));
+            cityTxtField.setText(String.valueOf(furnisher.getFurnisherCity()));
+            zipCodeTxtField.setText(String.valueOf(furnisher.getFurnisherZipcode()));
+            phoneTxtField.setText(String.valueOf(furnisher.getFurnisherPhone()));
+            
+
+            addFurnisherBtn.setText("Modifier Fournisseur");
+        }
+
+        frame.setLocation(800, 500);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }
 
@@ -97,4 +125,9 @@ public class FurnisherView {
     public void setAddFurnisherListener(ActionListener listener) {
         addFurnisherBtn.addActionListener(listener);
     }
+
+    public Furnisher getFurnisher() {
+        return furnisher;
+    }
+    
 }

@@ -85,6 +85,36 @@ public class FurnisherDAO {
         }
     }
 
+    public void updateFurnisher(Furnisher furnisher) {
+        String query = "UPDATE Furnisher SET furnisher_name = ?, furnisher_adress = ?, furnisher_complement = ?, furnisher_zipcode = ?, furnisher_city = ?, furnisher_country = ?, furnisher_phone = ? WHERE furnisher_id=?";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, furnisher.getFurnisherName());
+            statement.setString(2, furnisher.getFurnisherAdress());
+            statement.setString(3, furnisher.getFurnisherComplement());
+            statement.setString(4, furnisher.getFurnisherZipcode());
+            statement.setString(5, furnisher.getFurnisherCity());
+            statement.setString(6, furnisher.getFurnisherCountry());
+            statement.setString(7, furnisher.getFurnisherPhone());
+            statement.setInt(8, furnisher.getFurnisherId());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la modification du fournisseur : " + e.getMessage());
+        }
+    }
+
+    public void deleteFurnisher(int FurnisherId) {
+        String query = "DELETE FROM Furnisher WHERE furnisher_id=?";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, FurnisherId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la suppression du produit : " + e.getMessage());
+        }
+    }
+
     public List<Furnisher> getFurnishers() {
         String query = "SELECT * FROM Furnisher";
         List<Furnisher> furnishers = new ArrayList<Furnisher>();
