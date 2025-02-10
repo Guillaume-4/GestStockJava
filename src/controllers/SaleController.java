@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 import models.Sale;
 import models.DAO.SaleDAO;
-import views.SaleView;
+import views.sale.SaleView;
 
 public class SaleController {
     private SaleView view;

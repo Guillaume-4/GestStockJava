@@ -1,4 +1,4 @@
-package views.managers;
+package views.product;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -14,8 +14,6 @@ import models.AppUser;
 import models.Product;
 import models.DAO.ProductDAO;
 import views.MainMenuView;
-import views.ProductListView;
-import views.ProductView;
 import views.components.AppView;
 
 public class ManageProductView extends AppView {

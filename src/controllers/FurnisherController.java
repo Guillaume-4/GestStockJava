@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 import models.Furnisher;
 import models.DAO.FurnisherDAO;
-import views.FurnisherView;
+import views.furnisher.FurnisherView;
 
 public class FurnisherController {
     private FurnisherView view;

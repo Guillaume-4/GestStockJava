@@ -1,4 +1,4 @@
-package views;
+package views.product;
 
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
@@ -10,7 +10,6 @@ import models.DAO.CategoryDAO;
 import models.DAO.FurnisherDAO;
 import views.components.AppView;
 import views.components.NumericFilter;
-import views.managers.ManageProductView;
 import models.Product;
 
 import java.awt.Cursor;

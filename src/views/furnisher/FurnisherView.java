@@ -1,4 +1,4 @@
-package views;
+package views.furnisher;
 
 import javax.swing.*;
 import java.awt.*;

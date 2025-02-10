@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 import models.Category;
 import models.DAO.CategoryDAO;
-import views.CategoryView;
+import views.category.CategoryView;
 
 public class CategoryController {
     private CategoryView view;

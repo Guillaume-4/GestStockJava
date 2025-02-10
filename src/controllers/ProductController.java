@@ -8,7 +8,7 @@ import models.Product;
 import models.DAO.CategoryDAO;
 import models.DAO.FurnisherDAO;
 import models.DAO.ProductDAO;
-import views.ProductView;
+import views.product.ProductView;
 
 public class ProductController {
     private ProductView view;

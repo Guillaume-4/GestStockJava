@@ -3,7 +3,7 @@ package views;
 import javax.swing.*;
 import models.AppUser;
 import views.components.AppView;
-import views.managers.ManageProductView;
+import views.product.ManageProductView;
 
 import java.awt.*;
 
