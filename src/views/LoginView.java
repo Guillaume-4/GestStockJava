@@ -16,18 +16,6 @@ public class LoginView extends AppView {
     public LoginView() {
         super("Connexion", 600, 400, false);
 
-        // Title
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
-        JLabel titleLabel = new JLabel("Connexion");
-        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 20));
-        add(titleLabel, gbc);
-
-        // Empty Space
-        gbc.gridy = 1;
-        add(Box.createRigidArea(new Dimension(0, 10)), gbc);
-
         // Username
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.LINE_START;

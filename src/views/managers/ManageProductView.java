@@ -1,20 +1,21 @@
-package views;
+package views.managers;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import controllers.ProductController;
 import models.AppUser;
 import models.Product;
 import models.DAO.ProductDAO;
+import views.MainMenuView;
+import views.ProductListView;
+import views.ProductView;
 import views.components.AppView;
 
 public class ManageProductView extends AppView {
@@ -28,18 +29,6 @@ public class ManageProductView extends AppView {
     public ManageProductView(AppUser user) {
         super("Gestion des Produits", 600, 400, false);
         this.user = user;
-
-        // Title
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
-        JLabel titleLabel = new JLabel("Menu Principal");
-        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 20));
-        add(titleLabel, gbc);
-
-        // Empty Space
-        gbc.gridy = 1;
-        add(Box.createRigidArea(new Dimension(0, 10)), gbc);
 
         // Buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;

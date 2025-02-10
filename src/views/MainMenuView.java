@@ -3,6 +3,7 @@ package views;
 import javax.swing.*;
 import models.AppUser;
 import views.components.AppView;
+import views.managers.ManageProductView;
 
 import java.awt.*;
 
@@ -17,18 +18,6 @@ public class MainMenuView extends AppView {
     public MainMenuView(AppUser user) {
         super("Menu Principal", 600, 400, false);
         this.user = user;
-
-        // Title
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
-        JLabel titleLabel = new JLabel("Menu Principal");
-        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 20));
-        add(titleLabel, gbc);
-
-        // Empty Space
-        gbc.gridy = 1;
-        add(Box.createRigidArea(new Dimension(0, 10)), gbc);
 
         // Buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;

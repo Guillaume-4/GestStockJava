@@ -10,11 +10,11 @@ import models.DAO.CategoryDAO;
 import models.DAO.FurnisherDAO;
 import views.components.AppView;
 import views.components.NumericFilter;
+import views.managers.ManageProductView;
 import models.Product;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -32,18 +32,9 @@ public class ProductView extends AppView {
 
     // Constructors
     public ProductView(AppUser user, Product product) {
-        super("Gestion des Produits", 600, 600, false);
+        super(product == null ? "Ajout de Produit" : "Modification de Produit", 600, 600, false);
         this.user = user;
         this.product = product;
-
-        // Title
-        gbc.gridwidth = 2;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
-        JLabel titleLabel = new JLabel(this.product == null ? "Ajout de Produit" : "Modification de Produit");
-        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 20));
-        add(titleLabel, gbc);
 
         // Category list
         List<Category> categories = new CategoryDAO().getCategories();
@@ -58,10 +49,6 @@ public class ProductView extends AppView {
 
         for (int i = 0; i < furnishers.size(); i++)
             furnisherNames[i] = furnishers.get(i).getFurnisherName();
-
-        // Empty Space
-        gbc.gridy = 1;
-        add(Box.createRigidArea(new Dimension(0, 10)), gbc);
 
         // Name
         gbc.gridy = 2;

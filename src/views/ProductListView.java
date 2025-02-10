@@ -6,6 +6,7 @@ import models.AppUser;
 import models.Product;
 import models.DAO.ProductDAO;
 import views.components.AppView;
+import views.managers.ManageProductView;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
