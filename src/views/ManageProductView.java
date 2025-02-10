@@ -1,115 +1,182 @@
 package views;
 
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import controllers.ProductController;
 import models.AppUser;
 import models.Product;
 import models.DAO.ProductDAO;
+import views.components.AppView;
 
-public class ManageProductView {
-    private JFrame frame;
-
+public class ManageProductView extends AppView {
     private JButton addProductBtn;
     private JButton updateProductBtn;
     private JButton deleteProductBtn;
-
+    private JButton viewProductsBtn;
+    private JButton backBtn;
     private AppUser user;
 
     public ManageProductView(AppUser user) {
+        super("Gestion des Produits", 600, 400, false);
         this.user = user;
 
-        frame = new JFrame("Gestion des Produits");
-        frame.setLayout(new FlowLayout());
-        frame.setSize(400, 200);
+        // Title
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        JLabel titleLabel = new JLabel("Menu Principal");
+        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 20));
+        add(titleLabel, gbc);
 
+        // Empty Space
+        gbc.gridy = 1;
+        add(Box.createRigidArea(new Dimension(0, 10)), gbc);
+
+        // Buttons
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridy = 2;
         addProductBtn = new JButton("Ajouter Produit");
+        addProductBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        add(addProductBtn, gbc);
+
+        gbc.gridy = 3;
         updateProductBtn = new JButton("Modifier Produit");
+        updateProductBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        add(updateProductBtn, gbc);
+
+        gbc.gridy = 4;
         deleteProductBtn = new JButton("Supprimer Produit");
+        deleteProductBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        add(deleteProductBtn, gbc);
 
-        addProductBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ProductController(new ProductView(), new ProductDAO());
+        gbc.gridy = 5;
+        viewProductsBtn = new JButton("Voir Produits");
+        viewProductsBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        add(viewProductsBtn, gbc);
+
+        // Empty Space
+        gbc.gridy = 6;
+        add(Box.createRigidArea(new Dimension(0, 10)), gbc);
+
+        // Back Button
+        gbc.gridy = 7;
+        gbc.fill = GridBagConstraints.NONE;
+        backBtn = new JButton("Retour");
+        backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        add(backBtn, gbc);
+
+        // Insteractions
+        addProductBtn.addActionListener(e -> {
+            new ProductController(new ProductView(this.user, null), new ProductDAO());
+            dispose();
+        });
+
+        updateProductBtn.addActionListener(e -> {
+            List<Product> products = new ProductDAO().getAllProducts();
+
+            if (products.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Aucun produit trouvé !");
+                return;
+            }
+
+            String[] productNames = new String[products.size()];
+            for (int i = 0; i < products.size(); i++)
+                productNames[i] = products.get(i).getProductName();
+
+            String productName = (String) JOptionPane.showInputDialog(
+                    null,
+                    "Choisissez le produit à modifier :",
+                    "Modification de Produit",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    productNames,
+                    productNames[0]);
+
+            if (productName == null)
+                return;
+
+            Product product = new ProductDAO().getProductByName(productName);
+
+            if (product == null) {
+                JOptionPane.showMessageDialog(null, "Le produit " + productName + " n'a pas été trouvé !");
+                return;
+            }
+
+            new ProductController(new ProductView(this.user, product), new ProductDAO());
+            dispose();
+        });
+
+        deleteProductBtn.addActionListener(e -> {
+            if (user.getUserRole().equals("manager")) {
+                JOptionPane.showMessageDialog(null, "Vous n'avez pas la permission de supprimer des produits.");
+                return;
+            }
+
+            List<Product> products = new ProductDAO().getAllProducts();
+
+            if (products.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Aucun produit trouvé !");
+                return;
+            }
+
+            String[] productNames = new String[products.size()];
+            for (int i = 0; i < products.size(); i++)
+                productNames[i] = products.get(i).getProductName();
+
+            String productName = (String) JOptionPane.showInputDialog(
+                    null,
+                    "Choisissez le produit à supprimer :",
+                    "Suppression de Produit",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    productNames,
+                    productNames[0]);
+
+            if (productName == null)
+                return;
+
+            Product product = new ProductDAO().getProductByName(productName);
+
+            if (product == null) {
+                JOptionPane.showMessageDialog(null, "Le produit " + productName + " n'a pas été trouvé !");
+                return;
+            }
+
+            int confirm = JOptionPane.showConfirmDialog(null,
+                    "Êtes-vous sûr de vouloir supprimer ce produit ?",
+                    "Confirmation de Suppression",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                new ProductDAO().deleteProduct(product.getProductId());
+                JOptionPane.showMessageDialog(null, "Produit supprimé avec succès !");
+            } else {
+                JOptionPane.showMessageDialog(null, "Suppression annulée !");
             }
         });
 
-        updateProductBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String productName = JOptionPane.showInputDialog("Entrez le nom du produit à modifier :");
-
-                if (productName == null)
-                    return;
-                else if (productName.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Produit non trouvé !");
-                    return;
-                }
-
-                Product product = new ProductDAO().getProductByName(productName);
-
-                if (product == null) {
-                    JOptionPane.showMessageDialog(null, "Produit non trouvé !");
-                    return;
-                }
-
-                new ProductController(new ProductView(product), new ProductDAO());
-            }
+        viewProductsBtn.addActionListener(e -> {
+            new ProductListView(user);
+            dispose();
         });
 
-        deleteProductBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (user.getUserRole().equals("manager")) {
-                    JOptionPane.showMessageDialog(null, "Vous n'avez pas la permission de supprimer des produits.");
-                    return;
-                }
-
-                String productName = JOptionPane.showInputDialog("Entrez le nom du produit à supprimer :");
-
-                if (productName == null)
-                    return;
-                else if (productName.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Produit non trouvé !");
-                    return;
-                }
-
-                Product product = new ProductDAO().getProductByName(productName);
-
-                if (product == null) {
-                    JOptionPane.showMessageDialog(null, "Produit non trouvé !");
-                    return;
-                }
-
-                int confirm = JOptionPane.showConfirmDialog(null,
-                        "Êtes-vous sûr de vouloir supprimer ce produit ?",
-                        "Confirmation de Suppression",
-                        JOptionPane.YES_NO_OPTION);
-
-                if (confirm == JOptionPane.YES_OPTION) {
-                    new ProductDAO().deleteProduct(product.getProductId());
-                    JOptionPane.showMessageDialog(null, "Produit supprimé avec succès !");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Suppression annulée !");
-                }
-            }
+        backBtn.addActionListener(e -> {
+            new MainMenuView(user);
+            dispose();
         });
 
         if (user.getUserRole().equals("manager"))
             deleteProductBtn.setEnabled(false);
 
-        frame.add(addProductBtn);
-        frame.add(updateProductBtn);
-        frame.add(deleteProductBtn);
-
-        frame.setLocation(800, 500);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setVisible(true);
+        setVisible(true);
     }
 }
