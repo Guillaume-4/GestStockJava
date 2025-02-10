@@ -9,10 +9,12 @@ import java.awt.Insets;
 import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class AppView extends JFrame {
-    public String title;
-    public GridBagConstraints gbc;
+    private String title;
+    protected GridBagConstraints gbc;
+    protected JPanel contentPanel;
 
     public AppView(String title, int width, int height, boolean resizable) {
         super("GestStock - " + title);
@@ -21,8 +23,10 @@ public class AppView extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(width, height);
         setResizable(resizable);
-        setLayout(new GridBagLayout());
         setLocationRelativeTo(null);
+
+        contentPanel = new JPanel(new GridBagLayout());
+        setContentPane(contentPanel);
 
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 10, 5, 10);
@@ -36,10 +40,10 @@ public class AppView extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         JLabel titleLabel = new JLabel(this.title);
         titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 20));
-        add(titleLabel, gbc);
+        contentPanel.add(titleLabel, gbc);
 
         // Empty Space
         gbc.gridy = y + 1;
-        add(Box.createRigidArea(new Dimension(0, 10)), gbc);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
     }
 }

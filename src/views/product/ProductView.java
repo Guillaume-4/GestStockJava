@@ -56,56 +56,56 @@ public class ProductView extends AppView {
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.LINE_START;
         JLabel nameLabel = new JLabel("Nom du Produit");
-        add(nameLabel, gbc);
+        contentPanel.add(nameLabel, gbc);
 
         gbc.gridy = 3;
         nameTxtField = new JTextField(20);
-        add(nameTxtField, gbc);
+        contentPanel.add(nameTxtField, gbc);
 
         // Quantity
         gbc.gridy = 4;
         JLabel quantityLabel = new JLabel("Quantité :");
-        add(quantityLabel, gbc);
+        contentPanel.add(quantityLabel, gbc);
 
         gbc.gridy = 5;
         quantityTxtField = new JTextField(20);
         ((AbstractDocument) quantityTxtField.getDocument()).setDocumentFilter(new NumericFilter(false));
-        add(quantityTxtField, gbc);
+        contentPanel.add(quantityTxtField, gbc);
 
         // Unit Price
         gbc.gridy = 6;
         JLabel unitPriceLabel = new JLabel("Prix :");
-        add(unitPriceLabel, gbc);
+        contentPanel.add(unitPriceLabel, gbc);
 
         gbc.gridy = 7;
         unitPriceTxtField = new JTextField(20);
         ((AbstractDocument) unitPriceTxtField.getDocument()).setDocumentFilter(new NumericFilter(true));
-        add(unitPriceTxtField, gbc);
+        contentPanel.add(unitPriceTxtField, gbc);
 
         // Category
         gbc.gridy = 8;
         JLabel categoryLabel = new JLabel("Catégorie :");
-        add(categoryLabel, gbc);
+        contentPanel.add(categoryLabel, gbc);
 
         // Furnisher
         gbc.gridy = 10;
         JLabel furnisherLabel = new JLabel("Fournisseur :");
-        add(furnisherLabel, gbc);
+        contentPanel.add(furnisherLabel, gbc);
 
         // Selectors
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         gbc.gridy = 9;
         categorySelector = new JComboBox<String>(categoryNames);
-        add(categorySelector, gbc);
+        contentPanel.add(categorySelector, gbc);
 
         gbc.gridy = 11;
         furnisherSelector = new JComboBox<String>(furnisherNames);
-        add(furnisherSelector, gbc);
+        contentPanel.add(furnisherSelector, gbc);
 
         // Empty Space
         gbc.gridy = 12;
-        add(Box.createRigidArea(new Dimension(0, 10)), gbc);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
 
         // Product Action Button
         gbc.gridy = 13;
@@ -114,14 +114,14 @@ public class ProductView extends AppView {
         gbc.fill = GridBagConstraints.NONE;
         productActionBtn = new JButton(this.product == null ? "Ajouter Produit" : "Modifier Produit");
         productActionBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(productActionBtn, gbc);
+        contentPanel.add(productActionBtn, gbc);
 
         // Back Button
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.LINE_END;
         backBtn = new JButton("Retour");
         backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(backBtn, gbc);
+        contentPanel.add(backBtn, gbc);
 
         // Fields Initialization if necessary
         if (this.product != null) {
@@ -143,8 +143,8 @@ public class ProductView extends AppView {
             if (response == JOptionPane.CANCEL_OPTION)
                 return;
 
-            dispose();
             new ManageProductView(user);
+            dispose();
         });
 
         setVisible(true);

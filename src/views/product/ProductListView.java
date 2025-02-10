@@ -35,7 +35,7 @@ public class ProductListView extends AppView {
         gbc.gridwidth = 2;
         searchField = new JTextField(20);
         searchField.setToolTipText("Recherchez un produit..");
-        add(searchField, gbc);
+        contentPanel.add(searchField, gbc);
 
         // Table
         String[] columnNames = { "ID", "Nom", "Quantité", "Prix Unitaire", "Catégorie", "Fournisseur" };
@@ -48,7 +48,7 @@ public class ProductListView extends AppView {
         gbc.gridy = 4;
         gbc.weightx = 1;
         gbc.weighty = 1;
-        add(scrollPane, gbc);
+        contentPanel.add(scrollPane, gbc);
 
         // Buttons
         gbc.fill = GridBagConstraints.NONE;
@@ -60,11 +60,11 @@ public class ProductListView extends AppView {
 
         gbc.gridx = 0;
         refreshBtn = new JButton("Rafraîchir");
-        add(refreshBtn, gbc);
+        contentPanel.add(refreshBtn, gbc);
 
         gbc.gridx = 1;
         backBtn = new JButton("Retour");
-        add(backBtn, gbc);
+        contentPanel.add(backBtn, gbc);
 
         // Interactions
         searchField.addKeyListener(new KeyAdapter() {
@@ -77,8 +77,8 @@ public class ProductListView extends AppView {
         refreshBtn.addActionListener(e -> loadProducts());
 
         backBtn.addActionListener(e -> {
-            dispose();
             new ManageProductView(this.user);
+            dispose();
         });
 
         setVisible(true);

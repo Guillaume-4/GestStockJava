@@ -23,31 +23,31 @@ public class LoginView extends AppView {
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.LINE_START;
         JLabel usernameLabel = new JLabel("Nom d'Utilisateur");
-        add(usernameLabel, gbc);
+        contentPanel.add(usernameLabel, gbc);
 
         gbc.gridy = 3;
         nameTxtField = new JTextField(15);
-        add(nameTxtField, gbc);
+        contentPanel.add(nameTxtField, gbc);
 
         // Password
         gbc.gridy = 4;
         JLabel passwordLabel = new JLabel("Mot de Passe");
-        add(passwordLabel, gbc);
+        contentPanel.add(passwordLabel, gbc);
 
         gbc.gridy = 5;
         passwordTxtField = new JPasswordField(15);
-        add(passwordTxtField, gbc);
+        contentPanel.add(passwordTxtField, gbc);
 
         // Empty Space
         gbc.gridy = 6;
-        add(Box.createRigidArea(new Dimension(0, 10)), gbc);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
 
         // Login Button
         gbc.gridy = 7;
         gbc.anchor = GridBagConstraints.CENTER;
         loginBtn = new JButton("Se Connecter");
         loginBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(loginBtn, gbc);
+        contentPanel.add(loginBtn, gbc);
 
         // Interactions
         passwordTxtField.addActionListener(e -> loginAction());

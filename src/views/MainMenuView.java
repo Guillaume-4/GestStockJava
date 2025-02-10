@@ -27,33 +27,33 @@ public class MainMenuView extends AppView {
         gbc.gridy = 2;
         manageFurnishersBtn = new JButton("Gérer les Fournisseurs");
         manageFurnishersBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(manageFurnishersBtn, gbc);
+        contentPanel.add(manageFurnishersBtn, gbc);
 
         gbc.gridy = 3;
         manageCategoriesBtn = new JButton("Gérer les Catégories");
         manageCategoriesBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(manageCategoriesBtn, gbc);
+        contentPanel.add(manageCategoriesBtn, gbc);
 
         gbc.gridy = 4;
         manageProductsBtn = new JButton("Gérer les Produits");
         manageProductsBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(manageProductsBtn, gbc);
+        contentPanel.add(manageProductsBtn, gbc);
 
         gbc.gridy = 5;
         manageSalesBtn = new JButton("Gérer les Ventes");
         manageSalesBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(manageSalesBtn, gbc);
+        contentPanel.add(manageSalesBtn, gbc);
 
         // Empty Space
         gbc.gridy = 6;
-        add(Box.createRigidArea(new Dimension(0, 10)), gbc);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
 
         // Back Button
         gbc.gridy = 7;
         gbc.fill = GridBagConstraints.NONE;
         backBtn = new JButton("Retour");
         backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(backBtn, gbc);
+        contentPanel.add(backBtn, gbc);
 
         // Insteractions
         manageProductsBtn.addActionListener(e -> {

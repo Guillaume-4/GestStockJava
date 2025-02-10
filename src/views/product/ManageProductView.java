@@ -36,33 +36,33 @@ public class ManageProductView extends AppView {
         gbc.gridy = 2;
         addProductBtn = new JButton("Ajouter Produit");
         addProductBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(addProductBtn, gbc);
+        contentPanel.add(addProductBtn, gbc);
 
         gbc.gridy = 3;
         updateProductBtn = new JButton("Modifier Produit");
         updateProductBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(updateProductBtn, gbc);
+        contentPanel.add(updateProductBtn, gbc);
 
         gbc.gridy = 4;
         deleteProductBtn = new JButton("Supprimer Produit");
         deleteProductBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(deleteProductBtn, gbc);
+        contentPanel.add(deleteProductBtn, gbc);
 
         gbc.gridy = 5;
         viewProductsBtn = new JButton("Voir Produits");
         viewProductsBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(viewProductsBtn, gbc);
+        contentPanel.add(viewProductsBtn, gbc);
 
         // Empty Space
         gbc.gridy = 6;
-        add(Box.createRigidArea(new Dimension(0, 10)), gbc);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
 
         // Back Button
         gbc.gridy = 7;
         gbc.fill = GridBagConstraints.NONE;
         backBtn = new JButton("Retour");
         backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(backBtn, gbc);
+        contentPanel.add(backBtn, gbc);
 
         // Insteractions
         addProductBtn.addActionListener(e -> {
