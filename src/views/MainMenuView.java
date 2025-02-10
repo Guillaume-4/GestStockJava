@@ -45,8 +45,7 @@ public class MainMenuView extends AppView {
         contentPanel.add(manageSalesBtn, gbc);
 
         // Empty Space
-        gbc.gridy = 6;
-        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
+        addEmptySpace(0, 6, 10);
 
         // Back Button
         gbc.gridy = 7;
