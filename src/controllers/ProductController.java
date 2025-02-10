@@ -18,7 +18,7 @@ public class ProductController {
         this.view = view;
         this.productDAO = productDAO;
 
-        this.view.setProductListener(_ -> {
+        this.view.setProductListener(event -> {
             String name = view.getProductName();
             int quantity = view.getProductQuantity();
             double unitPrice = view.getProductUnitPrice();

@@ -10,7 +10,7 @@ import java.util.List;
 import models.Category;
 
 public class CategoryDAO {
-    public void addSale(Category category) {
+    public void addCategory(Category category) {
         String query = "INSERT INTO Category (category_name) VALUES (?)";
 
         try (Connection connection = DBConnection.getConnection();
@@ -64,6 +64,30 @@ public class CategoryDAO {
         } catch (SQLException e) {
             System.out.println("Erreur lors de la récupération de la catégorie : " + e.getMessage());
             return null;
+        }
+    }
+
+    public void updateCategory(Category category) {
+        String query = "UPDATE Category SET category_name=? WHERE category_id=?";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, category.getCategoryName());
+            statement.setInt(2, category.getCategoryId());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la modification de la catégorie : " + e.getMessage());
+        }
+    }
+
+    public void deleteCategory(int categoryId) {
+        String query = "DELETE FROM Category WHERE category_id=?";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, categoryId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la suppression de la catégorie : " + e.getMessage());
         }
     }
 

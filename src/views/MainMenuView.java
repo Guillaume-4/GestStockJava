@@ -41,7 +41,7 @@ public class MainMenuView {
         manageCategoriesBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // new ManageCategoryView(user);
+                new ManageCategoryView(user);
             }
         });
 

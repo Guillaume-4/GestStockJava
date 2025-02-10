@@ -16,7 +16,7 @@ public class SaleController {
         this.view = view;
         this.SaleDAO = SaleDAO;
 
-        this.view.setAddSaleListener(_ -> {
+        this.view.setAddSaleListener(event -> {
             Date date = view.getDate();
             Integer quantity = view.getQuantity();
 
