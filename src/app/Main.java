@@ -18,18 +18,19 @@ public class Main {
             Font uiFont = new Font(font, Font.PLAIN, 14);
             Font subtitleFont = new Font(font, Font.BOLD, 14);
 
-            UIManager.put("Label.font", subtitleFont);
-            UIManager.put("Button.font", uiFont);
-            UIManager.put("TextField.font", uiFont);
-            UIManager.put("PasswordField.font", uiFont);
-            UIManager.put("TitledBorder.font", uiFont);
-            UIManager.put("OptionPane.messageFont", uiFont);
-            UIManager.put("OptionPane.buttonFont", uiFont);
+            setUIFont(subtitleFont, "Label.font");
+            setUIFont(uiFont, "Button.font", "TextField.font", "PasswordField.font", "TitledBorder.font",
+                    "OptionPane.messageFont", "OptionPane.buttonFont");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         // Start Application
         new LoginView();
+    }
+
+    private static void setUIFont(Font font, String... components) {
+        for (String component : components)
+            UIManager.put(component, font);
     }
 }
