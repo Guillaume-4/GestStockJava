@@ -14,7 +14,7 @@ public class CategoryController {
         this.view = view;
         this.categoryDAO = categoryDAO;
 
-        this.view.setAddCategoryListener(_ -> {
+        this.view.setAddCategoryListener(e -> {
             String name = view.getCategoryName();
             Category category = new Category(name);
 
