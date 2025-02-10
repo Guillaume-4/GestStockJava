@@ -1,69 +1,71 @@
 package views;
 
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
+import javax.swing.*;
 import models.AppUser;
+import views.components.AppView;
+import views.product.ManageProductView;
 
-public class MainMenuView {
-    private JFrame frame;
+import java.awt.*;
 
+public class MainMenuView extends AppView {
     private JButton manageFurnishersBtn;
     private JButton manageCategoriesBtn;
     private JButton manageProductsBtn;
     private JButton manageSalesBtn;
-
+    private JButton backBtn;
     private AppUser user;
 
     public MainMenuView(AppUser user) {
+        super("Menu Principal", 600, 400, false);
         this.user = user;
 
-        frame = new JFrame("Menu Principal");
-        frame.setLayout(new FlowLayout());
-        frame.setSize(400, 200);
+        // Title
+        addTitleComponent(0, 0, 1);
 
+        // Buttons
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridy = 2;
         manageFurnishersBtn = new JButton("Gérer les Fournisseurs");
+        manageFurnishersBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        contentPanel.add(manageFurnishersBtn, gbc);
+
+        gbc.gridy = 3;
         manageCategoriesBtn = new JButton("Gérer les Catégories");
+        manageCategoriesBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        contentPanel.add(manageCategoriesBtn, gbc);
+
+        gbc.gridy = 4;
         manageProductsBtn = new JButton("Gérer les Produits");
+        manageProductsBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        contentPanel.add(manageProductsBtn, gbc);
+
+        gbc.gridy = 5;
         manageSalesBtn = new JButton("Gérer les Ventes");
+        manageSalesBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        contentPanel.add(manageSalesBtn, gbc);
 
-        manageFurnishersBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // new ManageFurnisherView(user);
-            }
+        // Empty Space
+        addEmptySpace(0, 6, 10);
+
+        // Back Button
+        gbc.gridy = 7;
+        gbc.fill = GridBagConstraints.NONE;
+        backBtn = new JButton("Retour");
+        backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        contentPanel.add(backBtn, gbc);
+
+        // Insteractions
+        manageProductsBtn.addActionListener(e -> {
+            new ManageProductView(user);
+            dispose();
         });
 
-        manageCategoriesBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // new ManageCategoryView(user);
-            }
+        backBtn.addActionListener(e -> {
+            new LoginView();
+            dispose();
         });
 
-        manageProductsBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ManageProductView(user);
-            }
-        });
-
-        manageSalesBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // new ManageSaleView(user);
-            }
-        });
-
-        frame.add(manageFurnishersBtn);
-        frame.add(manageCategoriesBtn);
-        frame.add(manageProductsBtn);
-        frame.add(manageSalesBtn);
-
+        // Role Management
         if (!user.getUserRole().equals("manager") && !user.getUserRole().equals("administrator")) {
             manageFurnishersBtn.setEnabled(false);
             manageCategoriesBtn.setEnabled(false);
@@ -71,8 +73,6 @@ public class MainMenuView {
             manageSalesBtn.setEnabled(false);
         }
 
-        frame.setLocation(800, 500);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setVisible(true);
+        setVisible(true);
     }
 }

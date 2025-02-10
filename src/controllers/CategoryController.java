@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 import models.Category;
 import models.DAO.CategoryDAO;
-import views.CategoryView;
+import views.category.CategoryView;
 
 public class CategoryController {
     private CategoryView view;
@@ -14,7 +14,7 @@ public class CategoryController {
         this.view = view;
         this.categoryDAO = categoryDAO;
 
-        this.view.setAddCategoryListener(_ -> {
+        this.view.setAddCategoryListener(e -> {
             String name = view.getCategoryName();
             Category category = new Category(name);
 
