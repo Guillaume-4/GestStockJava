@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 import models.Furnisher;
 import models.DAO.FurnisherDAO;
-import views.FurnisherView;
+import views.furnisher.FurnisherView;
 
 public class FurnisherController {
     private FurnisherView view;
@@ -14,7 +14,7 @@ public class FurnisherController {
         this.view = view;
         this.furnisherDAO = furnisherDAO;
 
-        this.view.setAddFurnisherListener(event -> {
+        this.view.setAddFurnisherListener(e -> {
             String name = view.getFurnisherName();
             String adress = view.getFurnisherAdress();
             String complement = view.getFurnisherComplement();

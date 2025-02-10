@@ -1,6 +1,8 @@
-package views;
+package views.category;
 
+import java.awt.Cursor;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,8 +14,9 @@ import controllers.CategoryController;
 import models.AppUser;
 import models.Category;
 import models.DAO.CategoryDAO;
+import views.components.AppView;
 
-public class ManageCategoryView {
+public class ManageCategoryView extends AppView {
     private JFrame frame;
 
     private JButton addCategoryBtn;
@@ -23,13 +26,19 @@ public class ManageCategoryView {
     private AppUser user;
 
     public ManageCategoryView(AppUser user) {
+        super("Gestion des Catégories", 600, 400, false);
         this.user = user;
 
-        frame = new JFrame("Gestion des Catégories");
-        frame.setLayout(new FlowLayout());
-        frame.setSize(400, 200);
+        // Title
+        addTitleComponent(0,0,1);
 
+        // Buttons
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridy = 2;
         addCategoryBtn = new JButton("Ajouter Catégorie");
+        addCategoryBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        contentPanel.add(addCategoryBtn, gbc);
+
         updateCategoryBtn = new JButton("Modifier Catégorie");
         deleteCategoryBtn = new JButton("Supprimer Catégorie");
 

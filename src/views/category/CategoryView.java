@@ -1,4 +1,4 @@
-package views;
+package views.category;
 
 import javax.swing.*;
 

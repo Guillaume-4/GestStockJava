@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 import models.Sale;
 import models.DAO.SaleDAO;
-import views.SaleView;
+import views.sale.SaleView;
 
 public class SaleController {
     private SaleView view;
@@ -16,7 +16,7 @@ public class SaleController {
         this.view = view;
         this.SaleDAO = SaleDAO;
 
-        this.view.setAddSaleListener(event -> {
+        this.view.setAddSaleListener(e -> {
             Date date = view.getDate();
             Integer quantity = view.getQuantity();
 

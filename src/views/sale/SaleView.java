@@ -1,4 +1,4 @@
-package views;
+package views.sale;
 
 import javax.swing.*;
 import java.awt.*;

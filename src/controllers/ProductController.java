@@ -8,7 +8,7 @@ import models.Product;
 import models.DAO.CategoryDAO;
 import models.DAO.FurnisherDAO;
 import models.DAO.ProductDAO;
-import views.ProductView;
+import views.product.ProductView;
 
 public class ProductController {
     private ProductView view;
@@ -18,7 +18,7 @@ public class ProductController {
         this.view = view;
         this.productDAO = productDAO;
 
-        this.view.setProductListener(event -> {
+        this.view.setProductListener(e -> {
             String name = view.getProductName();
             int quantity = view.getProductQuantity();
             double unitPrice = view.getProductUnitPrice();
@@ -33,13 +33,16 @@ public class ProductController {
 
                 productDAO.updateProduct(product);
 
-                JOptionPane.showMessageDialog(null, "Produit modifié !");
+                JOptionPane.showMessageDialog(null,
+                        "Le produit ID " + view.getProduct().getProductId() + " a été modifié :\n\n"
+                                + product.productDetails());
             } else {
                 Product product = new Product(name, quantity, unitPrice, category, furnisher, null);
 
                 productDAO.addProduct(product);
 
-                JOptionPane.showMessageDialog(null, "Produit ajouté !");
+                JOptionPane.showMessageDialog(null,
+                        "Le produit suivant a été ajouté :\n\n" + product.productDetails());
             }
         });
     }
