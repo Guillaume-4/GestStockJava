@@ -30,6 +30,9 @@ public class ManageProductView extends AppView {
         super("Gestion des Produits", 600, 400, false);
         this.user = user;
 
+        // Title
+        addTitleComponent(0, 0, 1);
+
         // Buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridy = 2;

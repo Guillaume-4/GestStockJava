@@ -36,6 +36,9 @@ public class ProductView extends AppView {
         this.user = user;
         this.product = product;
 
+        // Title
+        addTitleComponent(0, 0, 2);
+
         // Category list
         List<Category> categories = new CategoryDAO().getCategories();
         String[] categoryNames = new String[categories.size()];

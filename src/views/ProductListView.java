@@ -26,12 +26,14 @@ public class ProductListView extends AppView {
         super("Liste des produits", 800, 600, true);
         this.user = user;
 
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
+        // Title
+        addTitleComponent(0, 0, 2);
 
         // Search
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
         searchField = new JTextField(20);
         searchField.setToolTipText("Recherchez un produit..");
         add(searchField, gbc);
@@ -44,7 +46,7 @@ public class ProductListView extends AppView {
 
         loadProducts();
 
-        gbc.gridy = 1;
+        gbc.gridy = 4;
         gbc.weightx = 1;
         gbc.weighty = 1;
         add(scrollPane, gbc);
@@ -55,7 +57,7 @@ public class ProductListView extends AppView {
         gbc.gridwidth = 1;
         gbc.weighty = 0;
         gbc.weightx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 5;
 
         gbc.gridx = 0;
         refreshBtn = new JButton("Rafraîchir");
@@ -77,7 +79,7 @@ public class ProductListView extends AppView {
 
         backBtn.addActionListener(e -> {
             dispose();
-            new ManageProductView(user);
+            new ManageProductView(this.user);
         });
 
         setVisible(true);

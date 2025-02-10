@@ -16,6 +16,9 @@ public class LoginView extends AppView {
     public LoginView() {
         super("Connexion", 600, 400, false);
 
+        // Title
+        addTitleComponent(0, 0, 1);
+
         // Username
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.LINE_START;

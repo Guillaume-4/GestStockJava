@@ -11,10 +11,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class AppView extends JFrame {
+    public String title;
     public GridBagConstraints gbc;
 
     public AppView(String title, int width, int height, boolean resizable) {
         super("GestStock - " + title);
+        this.title = title;
+
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(width, height);
         setResizable(resizable);
@@ -23,17 +26,20 @@ public class AppView extends JFrame {
 
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 10, 5, 10);
+    }
 
+    public void addTitleComponent(int x, int y, int gridwidth) {
         // Title
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridx = x;
+        gbc.gridy = y;
+        gbc.gridwidth = gridwidth;
         gbc.anchor = GridBagConstraints.CENTER;
-        JLabel titleLabel = new JLabel(title);
+        JLabel titleLabel = new JLabel(this.title);
         titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 20));
         add(titleLabel, gbc);
 
         // Empty Space
-        gbc.gridy = 1;
+        gbc.gridy = y + 1;
         add(Box.createRigidArea(new Dimension(0, 10)), gbc);
     }
 }
