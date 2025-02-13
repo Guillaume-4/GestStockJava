@@ -4,58 +4,76 @@ import javax.swing.*;
 
 import models.AppUser;
 import models.DAO.AppUserDAO;
+import views.components.AppView;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class LoginView {
-    private JFrame frame;
-
+public class LoginView extends AppView {
     private JTextField nameTxtField;
     private JPasswordField passwordTxtField;
     private JButton loginBtn;
 
     public LoginView() {
-        frame = new JFrame("Connexion");
-        frame.setLayout(new FlowLayout());
-        frame.setSize(300, 150);
+        super("Connexion", 600, 400, false);
 
-        JLabel nameLabel = new JLabel("Nom d'Utilisateur:");
+        // Title
+        addTitleComponent(0, 0, 1);
+
+        // Username
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        JLabel usernameLabel = new JLabel("Nom d'Utilisateur");
+        contentPanel.add(usernameLabel, gbc);
+
+        gbc.gridy = 3;
         nameTxtField = new JTextField(15);
+        contentPanel.add(nameTxtField, gbc);
 
-        JLabel passwordLabel = new JLabel("Mot de Passe:");
+        // Password
+        gbc.gridy = 4;
+        JLabel passwordLabel = new JLabel("Mot de Passe");
+        contentPanel.add(passwordLabel, gbc);
+
+        gbc.gridy = 5;
         passwordTxtField = new JPasswordField(15);
+        contentPanel.add(passwordTxtField, gbc);
 
+        // Empty Space
+        addEmptySpace(0, 6, 10);
+
+        // Login Button
+        gbc.gridy = 7;
+        gbc.anchor = GridBagConstraints.CENTER;
         loginBtn = new JButton("Se Connecter");
+        loginBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        contentPanel.add(loginBtn, gbc);
 
-        loginBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String name = nameTxtField.getText();
+        // Interactions
+        passwordTxtField.addActionListener(e -> loginAction());
+        loginBtn.addActionListener(e -> loginAction());
 
-                String password = new String(passwordTxtField.getPassword());
+        setVisible(true);
+    }
 
-                AppUser user = new AppUserDAO().getUser(name, password);
+    // Functions
+    private void loginAction() {
+        String name = nameTxtField.getText();
+        String password = new String(passwordTxtField.getPassword()).trim();
 
-                if (user != null) {
-                    new MainMenuView(user);
-                    frame.dispose();
-                } else
-                    JOptionPane.showMessageDialog(null, "Nom d'utilisateur ou mot de passe incorrect !");
-            }
-        });
+        if (name.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs !");
+            return;
+        }
 
-        frame.add(nameLabel);
-        frame.add(nameTxtField);
+        AppUser user = new AppUserDAO().getUser(name, password);
 
-        frame.add(passwordLabel);
-        frame.add(passwordTxtField);
+        if (user == null) {
+            JOptionPane.showMessageDialog(this, "Nom d'utilisateur ou mot de passe incorrect !");
+            passwordTxtField.requestFocus();
+            return;
+        }
 
-        frame.add(loginBtn);
-
-        frame.setLocation(800, 500);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setVisible(true);
+        new MainMenuView(user);
+        dispose();
     }
 }

@@ -115,8 +115,12 @@ public class Product {
     }
 
     // Functions
-    public void afficher() {
-        System.out.println(this.toString());
+    public String productDetails() {
+        return "Product Name : " + product_name + "\n" +
+                "Product Quantity : " + product_quantity + "\n" +
+                "Product Unit Price : " + product_unit_price + "\n" +
+                "Category : " + category.getCategoryName() + "\n" +
+                "Furnisher : " + furnisher.getFurnisherName();
     }
 
     public boolean isSoldOut() {
