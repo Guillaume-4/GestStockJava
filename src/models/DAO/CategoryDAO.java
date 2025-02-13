@@ -91,9 +91,9 @@ public class CategoryDAO {
         }
     }
 
-    public List<Category> getCategories() {
+    public List<Category> getAllCategories() {
+        List<Category> categories = new ArrayList<>();
         String query = "SELECT * FROM Category";
-        List<Category> categories = new ArrayList<Category>();
 
         try (Connection connection = DBConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {

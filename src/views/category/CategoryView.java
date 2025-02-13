@@ -2,49 +2,81 @@ package views.category;
 
 import javax.swing.*;
 
+import models.AppUser;
 import models.Category;
+import views.components.AppView;
+import views.product.ManageProductView;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class CategoryView {
-    private JFrame frame;
-
+public class CategoryView extends AppView{
     private JTextField nameTxtField;
     
     private JButton categoryActionBtn;
+    private JButton backBtn;
 
+    private AppUser user;
     private Category category;
 
-    // Constructor
-    public CategoryView() {
-        this(null);
-    }
-    
-    public CategoryView(Category category) {
+    // Constructor    
+    public CategoryView(AppUser user, Category category) {
+        super("Gestion des Catégories", 600, 400, false);
         this.category = category;
-        frame = new JFrame("Gestion des Catégories");
-        frame.setLayout(new FlowLayout());
-        frame.setSize(300, 200);
+        this.user = user;
 
+
+        // Title
+        addTitleComponent(0, 0, 2);
+        
+        // Name
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.LINE_START;
         JLabel nameLabel = new JLabel("Nom de la Catégorie :");
+        contentPanel.add(nameLabel, gbc);
+
+        gbc.gridy = 3;
         nameTxtField = new JTextField(20);
+        contentPanel.add(nameTxtField, gbc);
 
-        categoryActionBtn = new JButton("Ajouter Catégorie");
+        // Category Action Button
+        gbc.gridy = 4;
+        gbc.gridwidth = 1;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.fill = GridBagConstraints.NONE;
+        categoryActionBtn = new JButton(this.category == null ? "Ajouter Catégorie" : "Modifier Catégorie");
+        categoryActionBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        contentPanel.add(categoryActionBtn, gbc);
 
-        frame.add(nameLabel);
-        frame.add(nameTxtField);
-        frame.add(categoryActionBtn);
+        // Back Button
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        backBtn = new JButton("Retour");
+        backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        contentPanel.add(backBtn, gbc);
 
+        // Fields Initialization if necessary
         if (this.category != null) {
             nameTxtField.setText(category.getCategoryName());
-
-            categoryActionBtn.setText("Modifier Catégorie");
         }
 
-        frame.setLocation(800, 500);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setVisible(true);
+        // Interactions
+        backBtn.addActionListener(e -> {
+            int response = JOptionPane.showConfirmDialog(
+                    this,
+                    "Voulez-vous vraiment revenir en arrière ? Les modifications seront perdues.",
+                    "Confirmation",
+                    JOptionPane.OK_CANCEL_OPTION);
+
+            if (response == JOptionPane.CANCEL_OPTION)
+                return;
+
+            new ManageCategoryView(user);
+            dispose();
+        });
+
+
+        setVisible(true);
     }
 
     // Getter
