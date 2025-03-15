@@ -2,6 +2,8 @@ package views;
 
 import javax.swing.*;
 import models.AppUser;
+import models.Role;
+import models.DAO.RoleDAO;
 import views.components.AppView;
 import views.product.ManageProductView;
 
@@ -66,7 +68,9 @@ public class MainMenuView extends AppView {
         });
 
         // Role Management
-        if (!user.getUserRole().equals("manager") && !user.getUserRole().equals("administrator")) {
+        Role userRole = new RoleDAO().getRoleByID(user.getUserRole());
+
+        if (!userRole.getRoleName().equals("manager") && !userRole.getRoleName().equals("administrator")) {
             manageFurnishersBtn.setEnabled(false);
             manageCategoriesBtn.setEnabled(false);
             manageProductsBtn.setEnabled(false);

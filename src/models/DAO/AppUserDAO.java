@@ -22,7 +22,7 @@ public class AppUserDAO {
                 int id = resultSet.getInt("user_id");
                 String name = resultSet.getString("user_name");
                 String password = resultSet.getString("user_password");
-                String role = resultSet.getString("user_role");
+                int role = resultSet.getInt("role_id");
 
                 return new AppUser(id, name, password, role);
             } else
