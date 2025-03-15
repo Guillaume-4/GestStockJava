@@ -6,6 +6,7 @@ import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import views.LoginView;
 
 public class Main {
@@ -24,6 +25,12 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Dotenv.configure()
+                .directory("../../")
+                .filename(".env")
+                .ignoreIfMalformed()
+                .ignoreIfMissing();
 
         // Start Application
         new LoginView();
