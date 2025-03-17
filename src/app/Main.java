@@ -26,6 +26,7 @@ public class Main {
             e.printStackTrace();
         }
 
+        // Configuring .env file
         Dotenv.configure()
                 .directory("../../")
                 .filename(".env")
