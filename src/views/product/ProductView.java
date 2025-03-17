@@ -104,8 +104,7 @@ public class ProductView extends AppView {
         contentPanel.add(furnisherSelector, gbc);
 
         // Empty Space
-        gbc.gridy = 12;
-        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
+        addEmptySpace(0, 12, 10);
 
         // Product Action Button
         gbc.gridy = 13;

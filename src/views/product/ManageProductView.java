@@ -1,18 +1,18 @@
 package views.product;
 
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.util.List;
 
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import controllers.ProductController;
 import models.AppUser;
 import models.Product;
+import models.Role;
 import models.DAO.ProductDAO;
+import models.DAO.RoleDAO;
 import views.MainMenuView;
 import views.components.AppView;
 
@@ -27,6 +27,7 @@ public class ManageProductView extends AppView {
     public ManageProductView(AppUser user) {
         super("Gestion des Produits", 600, 400, false);
         this.user = user;
+        Role userRole = new RoleDAO().getRoleByID(user.getUserRole());
 
         // Title
         addTitleComponent(0, 0, 1);
@@ -54,8 +55,7 @@ public class ManageProductView extends AppView {
         contentPanel.add(viewProductsBtn, gbc);
 
         // Empty Space
-        gbc.gridy = 6;
-        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
+        addEmptySpace(0, 6, 10);
 
         // Back Button
         gbc.gridy = 7;
@@ -64,7 +64,7 @@ public class ManageProductView extends AppView {
         backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         contentPanel.add(backBtn, gbc);
 
-        // Insteractions
+        // Interactions
         addProductBtn.addActionListener(e -> {
             new ProductController(new ProductView(this.user, null), new ProductDAO());
             dispose();
@@ -106,7 +106,7 @@ public class ManageProductView extends AppView {
         });
 
         deleteProductBtn.addActionListener(e -> {
-            if (user.getUserRole().equals("manager")) {
+            if (userRole.getRoleName().equals("Manager")) {
                 JOptionPane.showMessageDialog(null, "Vous n'avez pas la permission de supprimer des produits.");
                 return;
             }
@@ -164,7 +164,7 @@ public class ManageProductView extends AppView {
             dispose();
         });
 
-        if (user.getUserRole().equals("manager"))
+        if (userRole.getRoleName().equals("Manager"))
             deleteProductBtn.setEnabled(false);
 
         setVisible(true);

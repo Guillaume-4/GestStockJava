@@ -43,7 +43,12 @@ public class AppView extends JFrame {
         contentPanel.add(titleLabel, gbc);
 
         // Empty Space
-        gbc.gridy = y + 1;
-        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
+        addEmptySpace(x, y + 1, 10);
+    }
+
+    public void addEmptySpace(int x, int y, int height) {
+        gbc.gridx = x;
+        gbc.gridy = y;
+        contentPanel.add(Box.createRigidArea(new Dimension(0, height)), gbc);
     }
 }

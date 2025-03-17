@@ -12,7 +12,9 @@ import javax.swing.JOptionPane;
 import controllers.CategoryController;
 import models.AppUser;
 import models.Category;
+import models.Role;
 import models.DAO.CategoryDAO;
+import models.DAO.RoleDAO;
 import views.MainMenuView;
 import views.components.AppView;
 
@@ -28,6 +30,7 @@ public class ManageCategoryView extends AppView {
     public ManageCategoryView(AppUser user) {
         super("Gestion des Catégories", 600, 400, false);
         this.user = user;
+        Role userRole = new RoleDAO().getRoleByID(user.getUserRole());
 
         // Title
         addTitleComponent(0, 0, 1);
@@ -108,7 +111,7 @@ public class ManageCategoryView extends AppView {
         });
 
         deleteCategoryBtn.addActionListener(e -> {
-            if (user.getUserRole().equals("manager")) {
+            if (userRole.getRoleName().equals("Manager")) {
                 JOptionPane.showMessageDialog(null, "Vous n'avez pas la permission de supprimer des catégories.");
                 return;
             }
@@ -167,7 +170,7 @@ public class ManageCategoryView extends AppView {
             dispose();
         });
 
-        if (user.getUserRole().equals("manager"))
+        if (userRole.getRoleName().equals("Manager"))
             deleteCategoryBtn.setEnabled(false);
 
         setVisible(true);

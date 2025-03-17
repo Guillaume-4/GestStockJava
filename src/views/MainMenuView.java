@@ -3,6 +3,8 @@ package views;
 import javax.swing.*;
 import models.AppUser;
 import views.category.ManageCategoryView;
+import models.Role;
+import models.DAO.RoleDAO;
 import views.components.AppView;
 import views.product.ManageProductView;
 
@@ -46,8 +48,7 @@ public class MainMenuView extends AppView {
         contentPanel.add(manageSalesBtn, gbc);
 
         // Empty Space
-        gbc.gridy = 6;
-        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
+        addEmptySpace(0, 6, 10);
 
         // Back Button
         gbc.gridy = 7;
@@ -73,7 +74,9 @@ public class MainMenuView extends AppView {
         });
 
         // Role Management
-        if (!user.getUserRole().equals("manager") && !user.getUserRole().equals("administrator")) {
+        Role userRole = new RoleDAO().getRoleByID(user.getUserRole());
+
+        if (!userRole.getRoleName().equals("Manager") && !userRole.getRoleName().equals("Administrateur")) {
             manageFurnishersBtn.setEnabled(false);
             manageCategoriesBtn.setEnabled(false);
             manageProductsBtn.setEnabled(false);
