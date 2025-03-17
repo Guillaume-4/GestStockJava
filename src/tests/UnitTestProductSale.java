@@ -28,7 +28,7 @@ class UnitTestProductSale {
         assertEquals(1, product.getSales().size(), "Le produit devrait avoir une vente associée.");
         assertEquals(sale, product.getSales().get(0), "La vente associée au produit devrait être la bonne.");
 
-        // Verify that the sale has the correct product associated
+        // Check that the sale has the correct product associated
         assertEquals(product, sale.getProduct(), "Le produit de la vente devrait correspondre au produit associé.");
     }
 
