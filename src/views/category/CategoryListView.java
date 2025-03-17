@@ -103,7 +103,6 @@ public class CategoryListView extends AppView {
         for (Category category : categories)
             if (category.getCategoryName().toLowerCase().contains(searchString))
                 tableModel.addRow(new Object[] {
-                        category.getCategoryId(),
                         category.getCategoryName()
                 });
     }

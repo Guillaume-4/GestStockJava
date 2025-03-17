@@ -64,7 +64,7 @@ public class CategoryView extends AppView{
         backBtn.addActionListener(e -> {
             int response = JOptionPane.showConfirmDialog(
                     this,
-                    "Voulez-vous vraiment revenir en arrière ? Les modifications seront perdues.",
+                    "Voulez-vous vraiment revenir en arrière ? Le champ de saisie sera perdu.",
                     "Confirmation",
                     JOptionPane.OK_CANCEL_OPTION);
 
