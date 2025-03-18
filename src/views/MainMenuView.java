@@ -15,6 +15,7 @@ public class MainMenuView extends AppView {
     private JButton manageCategoriesBtn;
     private JButton manageProductsBtn;
     private JButton manageSalesBtn;
+    private JButton createUserBtn;
     private JButton backBtn;
     private AppUser user;
 
@@ -47,11 +48,16 @@ public class MainMenuView extends AppView {
         manageSalesBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         contentPanel.add(manageSalesBtn, gbc);
 
+        gbc.gridy = 6;
+        createUserBtn = new JButton("Créer un Utilisateur");
+        createUserBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        contentPanel.add(createUserBtn, gbc);
+
         // Empty Space
-        addEmptySpace(0, 6, 10);
+        addEmptySpace(0, 7, 10);
 
         // Back Button
-        gbc.gridy = 7;
+        gbc.gridy = 8;
         gbc.fill = GridBagConstraints.NONE;
         backBtn = new JButton("Retour");
         backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -65,6 +71,11 @@ public class MainMenuView extends AppView {
 
         manageCategoriesBtn.addActionListener(e -> {
             new ManageCategoryView(user);
+            dispose();
+        });
+
+        createUserBtn.addActionListener(e -> {
+            new CreateUserView(user);
             dispose();
         });
 
@@ -82,6 +93,9 @@ public class MainMenuView extends AppView {
             manageProductsBtn.setEnabled(false);
             manageSalesBtn.setEnabled(false);
         }
+
+        if (!userRole.getRoleName().equals("Administrateur"))
+            createUserBtn.setEnabled(false);
 
         setVisible(true);
     }

@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import models.AppUser;
 import models.DAO.AppUserDAO;
+import utils.PasswordUtil;
 import views.components.AppView;
 
 import java.awt.*;
@@ -65,7 +66,7 @@ public class LoginView extends AppView {
             return;
         }
 
-        AppUser user = new AppUserDAO().getUser(name, password);
+        AppUser user = new AppUserDAO().authenticateUser(name, password);
 
         if (user == null) {
             JOptionPane.showMessageDialog(this, "Nom d'utilisateur ou mot de passe incorrect !");
