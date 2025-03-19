@@ -23,7 +23,7 @@ public class FurnisherView extends AppView {
     private JTextField addressTxtField;
     private JTextField cityTxtField;
     private JTextField phoneTxtField;
-    private JComboBox<String> categorySelector;
+    private JTextField zipcodeTxtField;
     private JComboBox<String> furnisherSelector;
     private JButton FurnisherActionBtn;
     private JButton backBtn;
@@ -100,7 +100,7 @@ public class FurnisherView extends AppView {
         contentPanel.add(phoneTxtField, gbc);
 
         gbc.gridy = 11;
-        JTextField zipcodeTxtField = new JTextField(20);
+        zipcodeTxtField = new JTextField(20);
         ((AbstractDocument) zipcodeTxtField.getDocument()).setDocumentFilter(new NumericFilter(true));
         contentPanel.add(zipcodeTxtField, gbc);
 
@@ -168,7 +168,10 @@ public class FurnisherView extends AppView {
     }
 
     public String getFurnisherZipCode() {
-        return categorySelector.getSelectedItem().toString();
+        if (cityTxtField.getText().isEmpty())
+            return null;
+
+        return zipcodeTxtField.getText();
     }
 
     public String getFurnisherFurnisherName() {

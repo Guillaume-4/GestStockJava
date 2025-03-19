@@ -104,16 +104,6 @@ public class FurnisherDAO {
         }
     }
 
-    public void deleteFurnisher(int FurnisherId) {
-        String query = "DELETE FROM Furnisher WHERE furnisher_id=?";
-        try (Connection connection = DBConnection.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, FurnisherId);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la suppression du produit : " + e.getMessage());
-        }
-    }
 
     public List<Furnisher> getFurnishers() {
         String query = "SELECT * FROM Furnisher";

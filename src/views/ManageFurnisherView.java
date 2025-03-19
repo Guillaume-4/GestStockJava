@@ -12,6 +12,7 @@ import controllers.FurnisherController;
 import models.AppUser;
 import models.Furnisher;
 import models.DAO.FurnisherDAO;
+import views.furnisher.FurnisherView;
 
 public class ManageFurnisherView {
     private JFrame frame;
@@ -36,7 +37,7 @@ public class ManageFurnisherView {
         addFurnisherBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FurnisherController(new FurnisherView(), new FurnisherDAO());
+                new FurnisherController(new FurnisherView(user, null), new FurnisherDAO());
             }
         });
 
@@ -59,7 +60,7 @@ public class ManageFurnisherView {
                     return;
                 }
 
-                new FurnisherController(new FurnisherView(furnisher), new FurnisherDAO());
+                new FurnisherController(new FurnisherView(user, furnisher), new FurnisherDAO());
             }
         });
 
