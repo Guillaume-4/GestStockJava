@@ -3,6 +3,7 @@ package views;
 import javax.swing.*;
 import models.AppUser;
 import views.components.AppView;
+import views.furnisher.ManageFurnisherView;
 import views.product.ManageProductView;
 
 import java.awt.*;
@@ -57,6 +58,11 @@ public class MainMenuView extends AppView {
         // Insteractions
         manageProductsBtn.addActionListener(e -> {
             new ManageProductView(user);
+            dispose();
+        });
+
+        manageFurnishersBtn.addActionListener(e -> {
+            new ManageFurnisherView(user);
             dispose();
         });
 

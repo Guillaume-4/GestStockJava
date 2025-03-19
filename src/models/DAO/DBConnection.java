@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class DBConnection {
     private static final String URL = "jdbc:sqlserver://163.5.143.146:1433;databaseName=GestStockJava;encrypt=false";
     private static final String USER = "connect";
-    private static final String PASSWORD = "?5Q7_53RV3R?*";
+    private static final String PASSWORD = "?5Q7_53RV3R?**";
 
     private DBConnection() {}
 

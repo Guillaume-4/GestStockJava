@@ -14,7 +14,7 @@ public class FurnisherController {
         this.view = view;
         this.FurnisherDAO = FurnisherDAO;
 
-        this.view.setAddFurnisherListener(e -> {
+        this.view.setFurnisherListener(e -> {
             String name = view.getFurnisherName();
             String address = view.getFurnisherAdress();
             String complement = view.getFurnisherComplement();

@@ -15,7 +15,7 @@ public class Furnisher {
     private List<Product> products;
 
     // Constructors
-    public Furnisher() {
+    public Furnisher(String name, int quantity, double unitPrice, Category category, Furnisher furnisher, Object object) {
         this.products = new ArrayList<>();
     }
 
