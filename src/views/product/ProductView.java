@@ -39,7 +39,7 @@ public class ProductView extends AppView {
         addTitleComponent(0, 0, 2);
 
         // Category list
-        List<Category> categories = new CategoryDAO().getCategories();
+        List<Category> categories = new CategoryDAO().getAllCategories();
         String[] categoryNames = new String[categories.size()];
 
         for (int i = 0; i < categories.size(); i++)

@@ -14,12 +14,22 @@ public class CategoryController {
         this.view = view;
         this.categoryDAO = categoryDAO;
 
-        this.view.setAddCategoryListener(e -> {
+        this.view.setCategoryListener(e -> {
             String name = view.getCategoryName();
-            Category category = new Category(name);
 
-            categoryDAO.addSale(category);
-            JOptionPane.showMessageDialog(null, "Catégorie ajoutée !");
+            if (view.getCategory() != null) {
+                Category category = new Category(view.getCategory().getCategoryId(), name);
+
+                categoryDAO.updateCategory(category);
+
+                JOptionPane.showMessageDialog(null, "Catégorie modifié !");
+            } else {
+                Category category = new Category(name);
+
+                categoryDAO.addCategory(category);
+
+                JOptionPane.showMessageDialog(null, "Catégorie ajoutée !");
+            }
         });
     }
 }

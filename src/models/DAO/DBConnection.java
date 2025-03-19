@@ -3,15 +3,20 @@ package models.DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DBConnection {
-    private static final String URL = "jdbc:sqlserver://163.5.143.146:1433;databaseName=GestStockJava;encrypt=false";
-    private static final String USER = "connect";
-    private static final String PASSWORD = "?5Q7_53RV3R?**";
+import io.github.cdimascio.dotenv.Dotenv;
 
-    private DBConnection() {}
+public class DBConnection {
+    private static final Dotenv DOTENV = Dotenv.load();
+
+    private DBConnection() {
+    }
 
     public static Connection getConnection() {
         try {
+            String URL = DOTENV.get("DB_URL");
+            String USER = DOTENV.get("DB_USER");
+            String PASSWORD = DOTENV.get("DB_PASS");
+
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (Exception e) {

@@ -114,6 +114,11 @@ public class Product {
         this.sales = sales != null ? sales : new ArrayList<>();
     }
 
+    // Adders
+    public void addSale(Sale sale) {
+        this.sales.add(sale);
+    }
+
     // Functions
     public String productDetails() {
         return "Product Name : " + product_name + "\n" +
