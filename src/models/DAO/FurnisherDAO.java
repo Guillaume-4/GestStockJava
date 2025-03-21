@@ -11,7 +11,7 @@ import models.Furnisher;
 
 public class FurnisherDAO {
     public static void addFurnisher(Furnisher furnisher) {
-        String query = "INSERT INTO Furnisher (furnisher_name, furnisher_adress, furnisher_complement, furnisher_zipcode, furnisher_city, furnisher_country, furnisher_phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Furnisher (furnisher_name, furnisher_address, furnisher_complement, furnisher_zipcode, furnisher_city, furnisher_country, furnisher_phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DBConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
@@ -41,7 +41,7 @@ public class FurnisherDAO {
             if (resultSet.next()) {
                 int id = resultSet.getInt("furnisher_id");
                 String name = resultSet.getString("furnisher_name");
-                String adress = resultSet.getString("furnisher_adress");
+                String adress = resultSet.getString("furnisher_address");
                 String complement = resultSet.getString("furnisher_complement");
                 String zipcode = resultSet.getString("furnisher_zipcode");
                 String city = resultSet.getString("furnisher_city");
@@ -69,7 +69,7 @@ public class FurnisherDAO {
             if (resultSet.next()) {
                 int id = resultSet.getInt("furnisher_id");
                 String name = resultSet.getString("furnisher_name");
-                String adress = resultSet.getString("furnisher_adress");
+                String adress = resultSet.getString("furnisher_address");
                 String complement = resultSet.getString("furnisher_complement");
                 String zipcode = resultSet.getString("furnisher_zipcode");
                 String city = resultSet.getString("furnisher_city");
@@ -85,8 +85,8 @@ public class FurnisherDAO {
         }
     }
 
-    public void updateFurnisher(Furnisher furnisher) {
-        String query = "UPDATE Furnisher SET furnisher_name = ?, furnisher_adress = ?, furnisher_complement = ?, furnisher_zipcode = ?, furnisher_city = ?, furnisher_country = ?, furnisher_phone = ? WHERE furnisher_id=?";
+    public static void updateFurnisher(Furnisher furnisher) {
+        String query = "UPDATE Furnisher SET furnisher_name = ?, furnisher_address = ?, furnisher_complement = ?, furnisher_zipcode = ?, furnisher_city = ?, furnisher_country = ?, furnisher_phone = ? WHERE furnisher_id=?";
         try (Connection connection = DBConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, furnisher.getFurnisherName());
@@ -116,7 +116,7 @@ public class FurnisherDAO {
             while (resultSet.next()) {
                 int id = resultSet.getInt("furnisher_id");
                 String name = resultSet.getString("furnisher_name");
-                String adress = resultSet.getString("furnisher_adress");
+                String adress = resultSet.getString("furnisher_address");
                 String complement = resultSet.getString("furnisher_complement");
                 String zipcode = resultSet.getString("furnisher_zipcode");
                 String city = resultSet.getString("furnisher_city");

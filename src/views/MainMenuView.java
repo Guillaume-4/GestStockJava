@@ -72,6 +72,8 @@ public class MainMenuView extends AppView {
 
         manageFurnishersBtn.addActionListener(e -> {
             new ManageFurnisherView(user);
+            dispose();
+        });
 
         manageCategoriesBtn.addActionListener(e -> {
             new ManageCategoryView(user);

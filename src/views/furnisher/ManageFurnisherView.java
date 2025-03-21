@@ -105,7 +105,7 @@ public class ManageFurnisherView extends AppView {
         });
 
         deleteFurnisherBtn.addActionListener(e -> {
-            if (user.getUserRole().equals("manager")) {
+            if (user.getUserRole() == 1) {
                 JOptionPane.showMessageDialog(null, "Vous n'avez pas la permission de supprimer des Fournisseurs.");
                 return;
             }
@@ -163,7 +163,7 @@ public class ManageFurnisherView extends AppView {
             dispose();
         });
 
-        if (user.getUserRole().equals("manager"))
+        if (user.getUserRole() == 1)
             deleteFurnisherBtn.setEnabled(false);
 
         setVisible(true);

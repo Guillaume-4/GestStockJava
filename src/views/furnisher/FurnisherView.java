@@ -24,6 +24,7 @@ public class FurnisherView extends AppView {
     private JTextField cityTxtField;
     private JTextField phoneTxtField;
     private JTextField zipcodeTxtField;
+    private JTextField countryTxTField;
     private JComboBox<String> furnisherSelector;
     private JButton FurnisherActionBtn;
     private JButton backBtn;
@@ -40,7 +41,7 @@ public class FurnisherView extends AppView {
         addTitleComponent(0, 0, 2);
 
         // Category list
-        List<Category> categories = new CategoryDAO().getCategories();
+        List<Category> categories = new CategoryDAO().getAllCategories();
         String[] categoryNames = new String[categories.size()];
 
         for (int i = 0; i < categories.size(); i++)
@@ -82,33 +83,43 @@ public class FurnisherView extends AppView {
         contentPanel.add(cityTxtField, gbc);
 
         // Category
-        gbc.gridy = 8;
+        gbc.gridy = 11;
         JLabel phoneLabel = new JLabel("Numéro de téléphone :");
         contentPanel.add(phoneLabel, gbc);
 
         // Furnisher
-        gbc.gridy = 10;
+        gbc.gridy = 13;
         JLabel cpLabel = new JLabel("Code Postale :");
         contentPanel.add(cpLabel, gbc);
 
+         // Country
+         gbc.gridy = 9;
+         gbc.anchor = GridBagConstraints.LINE_START;
+         JLabel nameCountry = new JLabel("Pays");
+         contentPanel.add(nameCountry, gbc);
+        
+         gbc.gridy = 10;
+         countryTxTField = new JTextField(20);
+         contentPanel.add(countryTxTField, gbc);
+
         // Selectors
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridy = 9;
+        gbc.gridy = 12;
         phoneTxtField = new JTextField(20);
         ((AbstractDocument) phoneTxtField.getDocument()).setDocumentFilter(new NumericFilter(true));
         contentPanel.add(phoneTxtField, gbc);
         contentPanel.add(phoneTxtField, gbc);
 
-        gbc.gridy = 11;
+        gbc.gridy = 14;
         zipcodeTxtField = new JTextField(20);
         ((AbstractDocument) zipcodeTxtField.getDocument()).setDocumentFilter(new NumericFilter(true));
         contentPanel.add(zipcodeTxtField, gbc);
 
         // Empty Space
-        addEmptySpace(0, 12, 10);
+        addEmptySpace(0, 14, 10);
 
         // Furnisher Action Button
-        gbc.gridy = 13;
+        gbc.gridy = 15;
         gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.LINE_START;
         gbc.fill = GridBagConstraints.NONE;
@@ -128,6 +139,10 @@ public class FurnisherView extends AppView {
             nameTxtField.setText(Furnisher.getFurnisherName());
             addressTxtField.setText(String.valueOf(Furnisher.getFurnisherAdress()));
             cityTxtField.setText(String.valueOf(Furnisher.getFurnisherCity()));
+            countryTxTField.setText(String.valueOf(Furnisher.getFurnisherCountry()));
+            phoneTxtField.setText(String.valueOf(Furnisher.getFurnisherPhone()));
+            zipcodeTxtField.setText(String.valueOf(Furnisher.getFurnisherZipcode()));
+            
         }
 
         // Interactions
@@ -192,7 +207,7 @@ public class FurnisherView extends AppView {
     }
 
     public String getFurnisherCountry() {
-        return null;
+        return countryTxTField.getText();
     }
 
     public String getFurnisherPhone() {

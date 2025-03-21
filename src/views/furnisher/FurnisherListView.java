@@ -38,7 +38,7 @@ public class FurnisherListView extends AppView {
         contentPanel.add(searchField, gbc);
 
         // Table
-        String[] columnNames = { "ID", "Nom", "Quantité", "Prix Unitaire", "Catégorie", "Fournisseur" };
+        String[] columnNames = { "ID", "Nom", "Addresse", "Code Postale", "Ville", "Pays", "Téléphone" };
         tableModel = new DefaultTableModel(columnNames, 0);
         FurnisherTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(FurnisherTable);
@@ -94,9 +94,11 @@ public class FurnisherListView extends AppView {
                     Furnisher.getFurnisherId(),
                     Furnisher.getFurnisherName(),
                     Furnisher.getFurnisherAdress(),
-                    Furnisher.getFurnisherCity(),
-                    Furnisher.getFurnisherPhone(),
                     Furnisher.getFurnisherZipcode(),
+                    Furnisher.getFurnisherCity(),
+                    Furnisher.getFurnisherCountry(),
+                    Furnisher.getFurnisherPhone(),
+
             });
     }
 

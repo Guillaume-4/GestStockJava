@@ -6,7 +6,7 @@ import java.util.List;
 public class Furnisher {
     private int furnisher_id;
     private String furnisher_name;
-    private String furnisher_adress;
+    private String furnisher_address;
     private String furnisher_complement;
     private String furnisher_zipcode;
     private String furnisher_city;
@@ -29,7 +29,7 @@ public class Furnisher {
             String furnisher_phone,
             List<Product> products) {
         this.furnisher_name = furnisher_name;
-        this.furnisher_adress = furnisher_address;
+        this.furnisher_address = furnisher_address;
         this.furnisher_complement = furnisher_complement;
         this.furnisher_zipcode = furnisher_zipcode;
         this.furnisher_city = furnisher_city;
@@ -49,7 +49,7 @@ public class Furnisher {
             String furnisher_phone) {
         this.furnisher_id = furnisher_id;
         this.furnisher_name = furnisher_name;
-        this.furnisher_adress = furnisher_address;
+        this.furnisher_address = furnisher_address;
         this.furnisher_complement = furnisher_complement;
         this.furnisher_zipcode = furnisher_zipcode;
         this.furnisher_city = furnisher_city;
@@ -60,7 +60,7 @@ public class Furnisher {
 
     public Furnisher(String furnisher_name, String furnisher_address, String furnisher_complement, String furnisher_zipcode, String furnisher_city, String furnisher_country, String furnisher_phone) {
         this.furnisher_name = furnisher_name;
-        this.furnisher_adress = furnisher_address;
+        this.furnisher_address = furnisher_address;
         this.furnisher_complement = furnisher_complement;
         this.furnisher_zipcode = furnisher_zipcode;
         this.furnisher_city = furnisher_city;
@@ -79,7 +79,7 @@ public class Furnisher {
     }
 
     public String getFurnisherAdress() {
-        return furnisher_adress;
+        return furnisher_address;
     }
 
     public String getFurnisherComplement() {
@@ -111,8 +111,8 @@ public class Furnisher {
         this.furnisher_name = furnisher_name;
     }
 
-    public void setFurnisherAdress(String furnisher_adress) {
-        this.furnisher_adress = furnisher_adress;
+    public void setFurnisherAdress(String furnisher_address) {
+        this.furnisher_address = furnisher_address;
     }
 
     public void setFurnisherComplement(String furnisher_complement) {
@@ -149,7 +149,7 @@ public class Furnisher {
         return "Furnisher {" +
                 "furnisher_id=" + furnisher_id +
                 ", furnisher_name='" + furnisher_name + "'" +
-                ", furnisher_adress='" + furnisher_adress + "'" +
+                ", furnisher_address='" + furnisher_address + "'" +
                 ", products=" + products +
                 "}";
     }

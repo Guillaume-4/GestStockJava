@@ -27,13 +27,13 @@ public class FurnisherController {
                 Furnisher Furnisher = new Furnisher(view.getFurnisher().getFurnisherId(), name, address, complement, zipcode,
                 city, country, phone);
 
-                FurnisherDAO.updateFurnisher(Furnisher);
+                models.DAO.FurnisherDAO.updateFurnisher(Furnisher);
 
                 JOptionPane.showMessageDialog(null, "Fournisseur modifié !");
             } else {
                 Furnisher Furnisher = new Furnisher(name, address, complement, zipcode, city, country, phone);
 
-                FurnisherDAO.addFurnisher(Furnisher);
+                models.DAO.FurnisherDAO.addFurnisher(Furnisher);
 
                 JOptionPane.showMessageDialog(null, "Fournisseur ajouté !");
             }
