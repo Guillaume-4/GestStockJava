@@ -6,6 +6,7 @@ import views.category.ManageCategoryView;
 import models.Role;
 import models.DAO.RoleDAO;
 import views.components.AppView;
+import views.furnisher.ManageFurnisherView;
 import views.product.ManageProductView;
 
 import java.awt.*;
@@ -69,6 +70,11 @@ public class MainMenuView extends AppView {
             dispose();
         });
 
+        manageFurnishersBtn.addActionListener(e -> {
+            new ManageFurnisherView(user);
+            dispose();
+        });
+
         manageCategoriesBtn.addActionListener(e -> {
             new ManageCategoryView(user);
             dispose();
@@ -76,6 +82,7 @@ public class MainMenuView extends AppView {
 
         createUserBtn.addActionListener(e -> {
             new CreateUserView(user);
+
             dispose();
         });
 
