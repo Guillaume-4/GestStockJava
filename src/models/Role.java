@@ -27,17 +27,4 @@ public class Role {
     public void setRoleName(String role_name) {
         this.role_name = role_name;
     }
-
-    // Functions
-    public String productDetails() {
-        return "Role Name : " + role_name;
-    }
-
-    @Override
-    public String toString() {
-        return "Product {" +
-                "role_id=" + role_id +
-                ", role_name='" + role_name + "'" +
-                "}";
-    }
 }

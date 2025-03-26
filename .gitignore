@@ -4,3 +4,4 @@ lib/
 out/
 GestStockJava.iml
 .env
+.vscode/
