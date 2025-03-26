@@ -8,25 +8,35 @@ import views.furnisher.FurnisherView;
 
 public class FurnisherController {
     private FurnisherView view;
-    private FurnisherDAO furnisherDAO;
+    private FurnisherDAO FurnisherDAO;
 
-    public FurnisherController(FurnisherView view, FurnisherDAO furnisherDAO) {
+    public FurnisherController(FurnisherView view, FurnisherDAO FurnisherDAO) {
         this.view = view;
-        this.furnisherDAO = furnisherDAO;
+        this.FurnisherDAO = FurnisherDAO;
 
-        this.view.setAddFurnisherListener(e -> {
+        this.view.setFurnisherListener(e -> {
             String name = view.getFurnisherName();
-            String adress = view.getFurnisherAdress();
+            String address = view.getFurnisherAdress();
             String complement = view.getFurnisherComplement();
-            String zipCode = view.getFurnisherZipCode();
+            String zipcode = view.getFurnisherZipCode();
             String city = view.getFurnisherCity();
-            String country = view.getFurnisherCountry();
             String phone = view.getFurnisherPhone();
+            String country = view.getFurnisherCountry();
 
-            Furnisher furnisher = new Furnisher(name, adress, complement, zipCode, city, country, phone, null);
+            if (view.getFurnisher() != null) {
+                Furnisher Furnisher = new Furnisher(view.getFurnisher().getFurnisherId(), name, address, complement, zipcode,
+                city, country, phone);
 
-            furnisherDAO.addFurnisher(furnisher);
-            JOptionPane.showMessageDialog(null, "Fournisseur ajouté !");
+                models.DAO.FurnisherDAO.updateFurnisher(Furnisher);
+
+                JOptionPane.showMessageDialog(null, "Fournisseur modifié !");
+            } else {
+                Furnisher Furnisher = new Furnisher(name, address, complement, zipcode, city, country, phone);
+
+                models.DAO.FurnisherDAO.addFurnisher(Furnisher);
+
+                JOptionPane.showMessageDialog(null, "Fournisseur ajouté !");
+            }
         });
     }
 }
