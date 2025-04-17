@@ -8,6 +8,7 @@ import models.DAO.RoleDAO;
 import views.components.AppView;
 import views.furnisher.ManageFurnisherView;
 import views.product.ManageProductView;
+import views.sale.ManageSaleView;
 
 import java.awt.*;
 
@@ -80,6 +81,11 @@ public class MainMenuView extends AppView {
             dispose();
         });
 
+        manageSalesBtn.addActionListener(e -> {
+            new ManageSaleView(user);
+            dispose();
+        });
+
         createUserBtn.addActionListener(e -> {
             new CreateUserView(user);
 
@@ -98,6 +104,7 @@ public class MainMenuView extends AppView {
             manageFurnishersBtn.setEnabled(false);
             manageCategoriesBtn.setEnabled(false);
             manageProductsBtn.setEnabled(false);
+            manageSalesBtn.setEnabled(false);
             manageSalesBtn.setEnabled(false);
         }
 

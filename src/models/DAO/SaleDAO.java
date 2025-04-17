@@ -30,7 +30,7 @@ public class SaleDAO {
     public List<Sale> getSalesByProductAndDateRange(int productId, Date startDate, Date endDate) {
         List<Sale> sales = new ArrayList<>();
 
-        String query = "SELECT * FROM Sales WHERE product_id = ? AND sale_date BETWEEN ? AND ?";
+        String query = "SELECT * FROM Sale WHERE product_id = ? AND sale_date BETWEEN ? AND ?";
 
         try (Connection connection = DBConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
@@ -54,5 +54,86 @@ public class SaleDAO {
         }
 
         return sales;
+    }
+
+    public List<Sale> getAllSales() {
+        List<Sale> sales = new ArrayList<>();
+
+        String query = "SELECT * FROM Sale";
+
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int saleId = resultSet.getInt("sale_id");
+                Date date = resultSet.getDate("sale_date");
+                int quantite = resultSet.getInt("sale_quantity");
+                int productId = resultSet.getInt("product_id");
+
+                Product produit = new ProductDAO().getProductByID(productId);
+
+                sales.add(new Sale(saleId, quantite, date, produit));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des ventes : " + e.getMessage());
+        }
+
+        return sales;
+    }
+
+    public Sale getSaleByID(int saleID) {
+        
+        String query = "SELECT * FROM Sale WHERE sale_id = ?";
+
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, saleID);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int saleId = resultSet.getInt("sale_id");
+                Date date = resultSet.getDate("sale_date");
+                int quantite = resultSet.getInt("sale_quantity");
+                int productId = resultSet.getInt("product_id");
+
+                Product produit = new ProductDAO().getProductByID(productId);
+
+                return new Sale(saleId, quantite, date, produit);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des ventes : " + e.getMessage());
+        }
+
+        return null;
+    }
+
+    public void updateSale(Sale sale) {
+        String query = "UPDATE Sale SET sale_quantity=?, sale_date=?, product_id=? WHERE sale_id=?";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, sale.getSaleQuantity());
+            statement.setDate(2, sale.getSaleDate());
+            statement.setInt(3, sale.getProduct().getProductId());
+            statement.setInt(4, sale.getSaleId());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la modification de la vente : " + e.getMessage());
+        }
+    }
+
+    public void deleteSale(int saleId) {
+        String query = "DELETE FROM Sale WHERE sale_id=?";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, saleId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la suppression de la vente : " + e.getMessage());
+        }
     }
 }
