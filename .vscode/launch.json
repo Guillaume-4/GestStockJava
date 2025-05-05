@@ -9,27 +9,31 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "app.Main",
-            "projectName": "GestStockJava_74c87e7a"
+            "projectName": "GestStockJava_74c87e7a",
+            "vmArgs": "--enable-native-access=ALL-UNNAMED"
         },
         {
             "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "app.Main",
-            "projectName": "GestStockJava_6b0224b4"
+            "projectName": "GestStockJava_6b0224b4",
+            "vmArgs": "--enable-native-access=ALL-UNNAMED"
         },
         {
             "type": "java",
             "name": "Current File",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "${file}",
+            "vmArgs": "--enable-native-access=ALL-UNNAMED"
         },
         {
             "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "app.Main",
-            "projectName": "GestStockJava_9f029d7e"
+            "projectName": "GestStockJava_9f029d7e",
+            "vmArgs": "--enable-native-access=ALL-UNNAMED"
         }
     ]
 }
