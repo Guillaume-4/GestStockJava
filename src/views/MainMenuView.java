@@ -3,11 +3,14 @@ package views;
 import javax.swing.*;
 import models.AppUser;
 import views.category.ManageCategoryView;
+import views.client.ClientView;
+import views.client.ManageClientView;
 import models.Role;
 import models.DAO.RoleDAO;
 import views.components.AppView;
 import views.furnisher.ManageFurnisherView;
 import views.product.ManageProductView;
+import views.sale.SaleView;
 
 import java.awt.*;
 
@@ -18,6 +21,7 @@ public class MainMenuView extends AppView {
     private JButton manageSalesBtn;
     private JButton createUserBtn;
     private JButton backBtn;
+    private JButton createClientBtn;
     private AppUser user;
 
     public MainMenuView(AppUser user) {
@@ -57,16 +61,37 @@ public class MainMenuView extends AppView {
         // Empty Space
         addEmptySpace(0, 7, 10);
 
-        // Back Button
         gbc.gridy = 8;
+        gbc.fill = GridBagConstraints.NONE;
+        createClientBtn = new JButton("Gérer Clients");
+        createClientBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        contentPanel.add(createClientBtn, gbc);
+
+        // Empty Space
+        addEmptySpace(0, 9, 10);
+
+        // Back Button
+        gbc.gridy = 10;
         gbc.fill = GridBagConstraints.NONE;
         backBtn = new JButton("Retour");
         backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         contentPanel.add(backBtn, gbc);
 
+        
+
         // Insteractions
         manageProductsBtn.addActionListener(e -> {
             new ManageProductView(user);
+            dispose();
+        });
+
+        manageSalesBtn.addActionListener(e ->{
+            new SaleView();
+            dispose();
+        });
+
+        createClientBtn.addActionListener(e ->{
+            new ManageClientView(user);
             dispose();
         });
 
