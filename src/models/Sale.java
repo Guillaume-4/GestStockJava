@@ -66,4 +66,10 @@ public class Sale {
                 ", sale_date='" + sale_date + "'" +
                 "}";
     }
+
+    public String saleDetails() {
+        return  "Nom du Produit : " + product.getProductName() + "\n" +
+                "Quantité Vendue : " + sale_quantity + "\n" +
+                "Date de Vente : " + sale_date.toString();
+    }
 }
