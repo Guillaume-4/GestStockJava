@@ -5,18 +5,15 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import models.AppUser;
-import models.Product;
 import models.Sale;
-import models.DAO.ProductDAO;
 import models.DAO.SaleDAO;
 import views.components.AppView;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.List;
 
-public class SaleListView extends AppView{
+public class SaleListView extends AppView {
     private JTextField searchField;
     private DefaultTableModel tableModel;
     private JTable saleTable;
@@ -24,7 +21,7 @@ public class SaleListView extends AppView{
     private JButton refreshBtn;
     private List<Sale> sales;
     private AppUser user;
-    
+
     public SaleListView(AppUser user) {
         super("Liste des ventes", 800, 600, true);
         this.user = user;
@@ -42,7 +39,7 @@ public class SaleListView extends AppView{
         contentPanel.add(searchField, gbc);
 
         // Table
-        String[] columnNames = { "Numéro de Vente", "Nom du Produit", "Quantité" , "Date" };
+        String[] columnNames = { "Numéro de Vente", "Nom du Produit", "Quantité", "Date" };
         tableModel = new DefaultTableModel(columnNames, 0);
         saleTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(saleTable);
@@ -110,10 +107,10 @@ public class SaleListView extends AppView{
         for (Sale sale : sales)
             if (sale.getSaleId() == searchInteger)
                 tableModel.addRow(new Object[] {
-                    sale.getSaleId(),
-                    sale.getProduct().getProductName(),
-                    sale.getSaleQuantity(),
-                    sale.getSaleDate()
+                        sale.getSaleId(),
+                        sale.getProduct().getProductName(),
+                        sale.getSaleQuantity(),
+                        sale.getSaleDate()
                 });
     }
 }

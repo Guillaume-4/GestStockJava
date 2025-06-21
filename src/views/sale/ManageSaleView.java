@@ -22,6 +22,7 @@ public class ManageSaleView extends AppView {
     private JButton updateSaleBtn;
     private JButton deleteSaleBtn;
     private JButton viewSalesBtn;
+    private JButton reportsBtn;
     private JButton backBtn;
     private AppUser user;
 
@@ -55,11 +56,16 @@ public class ManageSaleView extends AppView {
         viewSalesBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         contentPanel.add(viewSalesBtn, gbc);
 
+        gbc.gridy = 6;
+        reportsBtn = new JButton("Rapports de Vente");
+        reportsBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        contentPanel.add(reportsBtn, gbc);
+
         // Empty Space
-        addEmptySpace(0, 6, 10);
+        addEmptySpace(0, 7, 10);
 
         // Back Button
-        gbc.gridy = 7;
+        gbc.gridy = 8;
         gbc.fill = GridBagConstraints.NONE;
         backBtn = new JButton("Retour");
         backBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -157,6 +163,11 @@ public class ManageSaleView extends AppView {
 
         viewSalesBtn.addActionListener(e -> {
             new SaleListView(user);
+            dispose();
+        });
+
+        reportsBtn.addActionListener(e -> {
+            new SalesReportView(user);
             dispose();
         });
 
