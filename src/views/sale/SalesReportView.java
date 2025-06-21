@@ -121,12 +121,12 @@ public class SalesReportView extends AppView {
         gbc.gridx = 0;
         contentPanel.add(generateReportBtn, gbc);
 
-        gbc.gridx = 2;
+        gbc.gridx = 3;
         gbc.anchor = GridBagConstraints.LINE_END;
         contentPanel.add(backBtn, gbc);
 
         // Report area
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridx = 0;
         gbc.gridwidth = 4;
         gbc.fill = GridBagConstraints.BOTH;
