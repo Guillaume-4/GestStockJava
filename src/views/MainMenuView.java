@@ -2,13 +2,9 @@ package views;
 
 import javax.swing.*;
 import models.AppUser;
-import views.category.ManageCategoryView;
 import models.Role;
 import models.DAO.RoleDAO;
 import views.components.AppView;
-import views.furnisher.ManageFurnisherView;
-import views.product.ManageProductView;
-import views.sale.ManageSaleView;
 
 import java.awt.*;
 
@@ -51,7 +47,7 @@ public class MainMenuView extends AppView {
         contentPanel.add(manageSalesBtn, gbc);
 
         gbc.gridy = 6;
-        createUserBtn = new JButton("Créer un Utilisateur");
+        createUserBtn = new JButton("Gérer les Utilisateurs");
         createUserBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         contentPanel.add(createUserBtn, gbc);
 
@@ -67,28 +63,27 @@ public class MainMenuView extends AppView {
 
         // Insteractions
         manageProductsBtn.addActionListener(e -> {
-            new ManageProductView(user);
+            new views.product.ManageProductView(user);
             dispose();
         });
 
         manageFurnishersBtn.addActionListener(e -> {
-            new ManageFurnisherView(user);
+            new views.furnisher.ManageFurnisherView(user);
             dispose();
         });
 
         manageCategoriesBtn.addActionListener(e -> {
-            new ManageCategoryView(user);
+            new views.category.ManageCategoryView(user);
             dispose();
         });
 
         manageSalesBtn.addActionListener(e -> {
-            new ManageSaleView(user);
+            new views.sale.ManageSaleView(user);
             dispose();
         });
 
         createUserBtn.addActionListener(e -> {
-            new CreateUserView(user);
-
+            new views.user.ManageAppUserView(user);
             dispose();
         });
 

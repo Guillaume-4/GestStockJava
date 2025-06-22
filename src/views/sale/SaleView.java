@@ -17,9 +17,9 @@ import models.AppUser;
 import models.Product;
 import models.Sale;
 import models.DAO.ProductDAO;
+
 import views.components.AppView;
 import views.components.NumericFilter;
-import views.product.ManageProductView;
 
 public class SaleView extends AppView {
     private JTextField quantityTxtField;
@@ -30,7 +30,8 @@ public class SaleView extends AppView {
     private JButton saleActionBtn;
     private JButton backBtn;
     private AppUser user;
-    
+    private List<Product> products; // Stocker la liste des produits
+
     // Constructor
     public SaleView(AppUser user, Sale sale) {
         super(sale == null ? "Ajout de Vente" : "Modification de Vente", 600, 400, false);
@@ -39,28 +40,17 @@ public class SaleView extends AppView {
 
         // Title
         addTitleComponent(0, 0, 2);
-        
+
         // Product List
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.LINE_START;
         JLabel namLabel = new JLabel("Nom du Produit");
         contentPanel.add(namLabel, gbc);
 
-        List<Product> products = new ProductDAO().getAllProducts();
-
-        if (products.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Aucun produit trouvé !");
-            return;
-        }
-
-        String[] productNames = new String[products.size()];
-        for (int i = 0; i < products.size(); i++)
-            productNames[i] = products.get(i).getProductName();
-
         gbc.gridy = 3;
-        productSelector = new JComboBox<String>(productNames);
+        productSelector = new JComboBox<String>();
+        loadProducts(); // Charger les produits initialement
         contentPanel.add(productSelector, gbc);
-
 
         // Quantity
         gbc.gridy = 4;
@@ -74,18 +64,23 @@ public class SaleView extends AppView {
 
         // Date
         gbc.gridy = 6;
-        JLabel dateLabel = new JLabel("Date :");
+        JLabel dateLabel = new JLabel("Date (YYYY-MM-DD) :");
         contentPanel.add(dateLabel, gbc);
 
         gbc.gridy = 7;
         dateTxtField = new JTextField(20);
+        dateTxtField.setToolTipText("Format: YYYY-MM-DD (ex: 1970-01-01)");
+        // Pré-remplir avec la date d'aujourd'hui par défaut
+        if (this.sale == null) {
+            dateTxtField.setText(new Date(System.currentTimeMillis()).toString());
+        }
         contentPanel.add(dateTxtField, gbc);
-            
+
         // Empty Space
         addEmptySpace(0, 8, 10);
 
         // Sale Action Button
-        gbc.gridy =9;
+        gbc.gridy = 9;
         gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.LINE_START;
         gbc.fill = GridBagConstraints.NONE;
@@ -104,7 +99,16 @@ public class SaleView extends AppView {
         if (this.sale != null) {
             quantityTxtField.setText(String.valueOf(sale.getSaleQuantity()));
             dateTxtField.setText(String.valueOf(sale.getSaleDate()));
-            productSelector.setSelectedItem(sale.getProduct().getProductName());
+
+            // Trouver et sélectionner le bon produit dans la liste
+            String productName = sale.getProduct().getProductName();
+            for (int i = 0; i < productSelector.getItemCount(); i++) {
+                String item = productSelector.getItemAt(i);
+                if (item.startsWith(productName + " (Stock: ")) {
+                    productSelector.setSelectedIndex(i);
+                    break;
+                }
+            }
         }
 
         // Interactions
@@ -122,14 +126,21 @@ public class SaleView extends AppView {
             dispose();
         });
 
-        setVisible(true);   
+        setVisible(true);
     }
-
-
 
     // Getters
     public Date getSaleDate() {
-        return Date.valueOf(dateTxtField.getText());
+        try {
+            return Date.valueOf(dateTxtField.getText());
+        } catch (IllegalArgumentException e) {
+            // Si le format est incorrect, afficher un message d'erreur
+            JOptionPane.showMessageDialog(this,
+                    "Format de date invalide !\nUtilisez le format: YYYY-MM-DD\nExemple: 1970-01-01",
+                    "Erreur de Format",
+                    JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
     }
 
     public Integer getSaleQuantity() {
@@ -144,11 +155,63 @@ public class SaleView extends AppView {
     }
 
     public String getProductName() {
-        return productSelector.getSelectedItem().toString();
+        String selectedItem = productSelector.getSelectedItem().toString();
+        // Extraire seulement le nom du produit (avant " (Stock: ")
+        int stockIndex = selectedItem.indexOf(" (Stock: ");
+        if (stockIndex > 0) {
+            return selectedItem.substring(0, stockIndex);
+        }
+        return selectedItem;
     }
 
     // Setters
     public void setSaleListener(ActionListener listener) {
         saleActionBtn.addActionListener(listener);
-    }    
+    }
+
+    // Méthodes pour gérer la liste des produits
+    private void loadProducts() {
+        products = new ProductDAO().getAllProducts();
+
+        if (products.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Aucun produit trouvé !");
+            return;
+        }
+
+        updateProductSelector();
+    }
+
+    private void updateProductSelector() {
+        String selectedProductName = null;
+
+        // Sauvegarder la sélection actuelle si elle existe
+        if (productSelector.getItemCount() > 0 && productSelector.getSelectedItem() != null) {
+            selectedProductName = getProductName();
+        }
+
+        // Vider et recharger la liste
+        productSelector.removeAllItems();
+
+        for (Product product : products) {
+            String itemText = product.getProductName() + " (Stock: " + product.getProductQuantity() + ")";
+            productSelector.addItem(itemText);
+        }
+
+        // Restaurer la sélection si possible
+        if (selectedProductName != null) {
+            for (int i = 0; i < productSelector.getItemCount(); i++) {
+                String item = productSelector.getItemAt(i);
+                if (item.startsWith(selectedProductName + " (Stock: ")) {
+                    productSelector.setSelectedIndex(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void refreshProductList() {
+        // Recharger les produits depuis la base de données
+        products = new ProductDAO().getAllProducts();
+        updateProductSelector();
+    }
 }

@@ -138,4 +138,59 @@ public class ProductDAO {
         }
         return products;
     }
+    
+    public boolean updateProductQuantity(int productId, int newQuantity) {
+        String query = "UPDATE Product SET product_quantity = ? WHERE product_id = ?";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, newQuantity);
+            statement.setInt(2, productId);
+            
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la mise à jour de la quantité : " + e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean reduceProductQuantity(int productId, int quantityToReduce) {
+        // D'abord, récupérer la quantité actuelle
+        Product product = getProductByID(productId);
+        if (product == null) {
+            return false;
+        }
+        
+        int currentQuantity = product.getProductQuantity();
+        int newQuantity = currentQuantity - quantityToReduce;
+        
+        // Vérifier que la nouvelle quantité n'est pas négative
+        if (newQuantity < 0) {
+            return false;
+        }
+        
+        return updateProductQuantity(productId, newQuantity);
+    }
+    
+    public boolean increaseProductQuantity(int productId, int quantityToAdd) {
+        // Récupérer la quantité actuelle
+        Product product = getProductByID(productId);
+        if (product == null) {
+            return false;
+        }
+        
+        int currentQuantity = product.getProductQuantity();
+        int newQuantity = currentQuantity + quantityToAdd;
+        
+        return updateProductQuantity(productId, newQuantity);
+    }
+    
+    public boolean hasEnoughStock(int productId, int requiredQuantity) {
+        Product product = getProductByID(productId);
+        if (product == null) {
+            return false;
+        }
+        
+        return product.getProductQuantity() >= requiredQuantity;
+    }
 }

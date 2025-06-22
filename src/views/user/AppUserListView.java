@@ -1,29 +1,29 @@
-package views.sale;
-
-import java.util.List;
+package views.user;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import models.AppUser;
-import models.Sale;
-import models.DAO.SaleDAO;
+import models.Role;
+import models.DAO.AppUserDAO;
+import models.DAO.RoleDAO;
 import views.components.AppView;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
-public class SaleListView extends AppView {
+public class AppUserListView extends AppView {
     private JTextField searchField;
     private DefaultTableModel tableModel;
-    private JTable saleTable;
+    private JTable userTable;
     private JButton backBtn;
     private JButton refreshBtn;
-    private List<Sale> sales;
+    private List<AppUser> users;
     private AppUser user;
 
-    public SaleListView(AppUser user) {
-        super("Liste des ventes", 800, 600, true);
+    public AppUserListView(AppUser user) {
+        super("Liste des utilisateurs", 800, 600, true);
         this.user = user;
 
         // Title
@@ -35,16 +35,16 @@ public class SaleListView extends AppView {
         gbc.gridy = 2;
         gbc.gridwidth = 2;
         searchField = new JTextField(20);
-        searchField.setToolTipText("Rechercher une vente..");
+        searchField.setToolTipText("Recherchez un utilisateur..");
         contentPanel.add(searchField, gbc);
 
         // Table
-        String[] columnNames = { "Numéro de Vente", "Nom du Produit", "Quantité", "Date" };
+        String[] columnNames = { "ID", "Nom d'utilisateur", "Rôle" };
         tableModel = new DefaultTableModel(columnNames, 0);
-        saleTable = new JTable(tableModel);
-        JScrollPane scrollPane = new JScrollPane(saleTable);
+        userTable = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(userTable);
 
-        loadSales();
+        loadUsers();
 
         gbc.gridy = 3;
         gbc.weightx = 1;
@@ -71,46 +71,55 @@ public class SaleListView extends AppView {
         searchField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                filterSales();
+                filterUsers();
             }
         });
 
-        refreshBtn.addActionListener(e -> loadSales());
+        refreshBtn.addActionListener(e -> loadUsers());
 
         backBtn.addActionListener(e -> {
-            new ManageSaleView(this.user);
+            new ManageAppUserView(this.user);
             dispose();
         });
 
         setVisible(true);
     }
 
-    private void loadSales() {
+    private void loadUsers() {
         tableModel.setRowCount(0);
 
-        sales = new SaleDAO().getAllSales();
+        users = new AppUserDAO().getAllUsers();
+        RoleDAO roleDAO = new RoleDAO();
 
-        for (Sale sale : sales)
+        for (AppUser user : users) {
+            Role role = roleDAO.getRoleByID(user.getUserRole());
+            String roleName = role != null ? role.getRoleName() : "Inconnu";
+
             tableModel.addRow(new Object[] {
-                    sale.getSaleId(),
-                    sale.getProduct().getProductName(),
-                    sale.getSaleQuantity(),
-                    sale.getSaleDate()
+                    user.getUserId(),
+                    user.getUserName(),
+                    roleName
             });
+        }
     }
 
-    private void filterSales() {
+    private void filterUsers() {
         tableModel.setRowCount(0);
 
-        Integer searchInteger = Integer.parseInt(searchField.getText().trim());
+        String searchString = searchField.getText().trim().toLowerCase();
+        RoleDAO roleDAO = new RoleDAO();
 
-        for (Sale sale : sales)
-            if (sale.getSaleId() == searchInteger)
+        for (AppUser user : users) {
+            if (user.getUserName().toLowerCase().contains(searchString)) {
+                Role role = roleDAO.getRoleByID(user.getUserRole());
+                String roleName = role != null ? role.getRoleName() : "Inconnu";
+
                 tableModel.addRow(new Object[] {
-                        sale.getSaleId(),
-                        sale.getProduct().getProductName(),
-                        sale.getSaleQuantity(),
-                        sale.getSaleDate()
+                        user.getUserId(),
+                        user.getUserName(),
+                        roleName
                 });
+            }
+        }
     }
 }
